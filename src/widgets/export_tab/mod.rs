@@ -15,26 +15,10 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-mod endpoint_pane;
-mod export_tab;
-mod file_dialogs;
-mod item_pane;
-mod key_value_pane;
-mod key_value_row;
-mod method_dropdown;
-mod request_body;
-mod response_headers;
-mod response_panel;
-mod save_dialog;
+mod base;
+mod curl;
+mod tab;
 
-pub use endpoint_pane::EndpointPane;
-pub use export_tab::*;
-pub use file_dialogs::*;
-pub use item_pane::ItemPane;
-pub use key_value_pane::KeyValuePane;
-pub use key_value_row::KeyValueRow;
-pub use method_dropdown::MethodDropdown;
-pub use request_body::*;
-pub use response_headers::ResponseHeaders;
-pub use response_panel::ResponsePanel;
-pub use save_dialog::SaveDialog;
+pub use base::*;
+pub use curl::*;
+pub use tab::*;

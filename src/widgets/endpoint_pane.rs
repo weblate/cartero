@@ -35,10 +35,12 @@ mod imp {
 
     use crate::app::CarteroApplication;
     use crate::client::{BoundRequest, RequestError};
-    use crate::entities::{EndpointData, KeyValue};
+    use crate::entities::{EndpointData, KeyValue, RequestExportType};
     use crate::error::CarteroError;
     use crate::objects::KeyValueItem;
-    use crate::widgets::{ItemPane, KeyValuePane, MethodDropdown, PayloadTab, ResponsePanel};
+    use crate::widgets::{
+        ExportTab, ItemPane, KeyValuePane, MethodDropdown, PayloadTab, ResponsePanel,
+    };
 
     #[derive(CompositeTemplate, Properties, Default)]
     #[template(resource = "/es/danirod/Cartero/endpoint_pane.ui")]
@@ -64,6 +66,9 @@ mod imp {
 
         #[template_child]
         pub payload_pane: TemplateChild<PayloadTab>,
+
+        #[template_child]
+        pub export_pane: TemplateChild<ExportTab>,
 
         #[template_child]
         pub response: TemplateChild<ResponsePanel>,
@@ -191,6 +196,8 @@ mod imp {
                 .connect_changed(glib::clone!(@weak self as pane => move |_| pane.mark_dirty()));
             self.payload_pane
                 .connect_changed(glib::clone!(@weak self as pane => move |_| pane.mark_dirty()));
+            self.export_pane
+                .connect_changed(glib::clone!(@weak self as pane => move |_| pane.mark_dirty()));
             self.header_pane
                 .connect_changed(glib::clone!(@weak self as pane => move |_| pane.mark_dirty()));
             self.variable_pane
@@ -248,6 +255,8 @@ mod imp {
             self.header_pane.set_entries(&headers);
             self.variable_pane.set_entries(&variables);
             self.payload_pane.set_payload(&endpoint.body);
+            self.export_pane
+                .set_request_export_type(&RequestExportType::None);
         }
 
         /// Takes the current state of the pane and extracts it into an Endpoint value.
