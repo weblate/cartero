@@ -6,9 +6,7 @@ pub struct CurlService {
 
 impl CurlService {
     pub fn new(endpoint_data: EndpointData) -> Self {
-        Self {
-            endpoint_data,
-        }
+        Self { endpoint_data }
     }
 
     pub fn generate(&self) -> String {

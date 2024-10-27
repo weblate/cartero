@@ -17,10 +17,10 @@
 
 mod base;
 mod curl;
-mod tab;
 mod service;
+mod tab;
 
 pub use base::*;
 pub use curl::*;
-pub use tab::*;
 pub use service::*;
+pub use tab::*;
