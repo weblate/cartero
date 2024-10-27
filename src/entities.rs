@@ -223,7 +223,7 @@ pub enum RequestPayload {
 pub enum RequestExportType {
     #[default]
     None,
-    Curl,
+    Curl(EndpointData),
 }
 
 #[derive(Debug, Default, Clone, Eq, PartialEq)]

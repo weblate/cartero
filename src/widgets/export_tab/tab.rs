@@ -140,12 +140,12 @@ mod imp {
             // self.curl.set_format(export_type);
         }
 
-        pub(super) fn export_type(&self) -> ExportType {
+        pub fn export_type(&self) -> ExportType {
             let n_item = self.combo.selected();
             ExportType::types()[n_item as usize]
         }
 
-        pub(super) fn set_export_type(&self, et: ExportType) {
+        pub fn set_export_type(&self, et: ExportType) {
             let pos = ExportType::types().iter().position(|&t| t == et).unwrap();
             self.combo.set_selected(pos as u32);
         }
@@ -181,10 +181,10 @@ impl ExportTab {
 
         imp.set_export_type(match req_export_type {
             RequestExportType::None => ExportType::None,
-            RequestExportType::Curl => ExportType::Curl,
+            RequestExportType::Curl(_) => ExportType::Curl,
         });
 
-        let widget = self.imp().get_active_widget();
+        let widget = imp.get_active_widget();
 
         match imp.export_type() {
             ExportType::None => {}

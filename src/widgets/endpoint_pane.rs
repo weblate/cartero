@@ -39,7 +39,7 @@ mod imp {
     use crate::error::CarteroError;
     use crate::objects::KeyValueItem;
     use crate::widgets::{
-        ExportTab, ItemPane, KeyValuePane, MethodDropdown, PayloadTab, ResponsePanel,
+        ExportTab, ExportType, ItemPane, KeyValuePane, MethodDropdown, PayloadTab, ResponsePanel,
     };
 
     #[derive(CompositeTemplate, Properties, Default)]
@@ -134,6 +134,18 @@ mod imp {
                         }
                     }
                 }));
+
+            // update export pane data when user selects another option in the combo box.
+            self.export_pane
+                .connect_changed(glib::clone!(@weak self as window => move |_| {
+                    if window.export_pane.imp().export_type() == ExportType::Curl {
+                        if let Ok(data) = window.extract_endpoint() {
+                            window.export_pane_load_endpoint_data(&data);
+                        }
+                    }
+                }));
+
+            self.configure_export_pane_bindings();
         }
     }
 
@@ -230,11 +242,60 @@ mod imp {
         #[template_callback]
         fn on_url_changed(&self) {
             self.update_send_button_sensitivity();
+
+            if let Ok(data) = self.extract_endpoint() {
+                self.export_pane_load_endpoint_data(&data);
+            }
         }
 
         #[template_callback]
         fn on_url_activated(&self) {
             let _ = self.obj().activate_action("win.request", None);
+        }
+
+        /// Loads data for the export pane module by using an `EndpointData` structure.
+        fn export_pane_load_endpoint_data(&self, endpoint: &EndpointData) {
+            let req_export_type = self.export_pane.request_export_type();
+
+            if let RequestExportType::None = req_export_type {
+                return;
+            }
+
+            if let RequestExportType::Curl(_) = req_export_type {
+                self.export_pane
+                    .set_request_export_type(&RequestExportType::Curl(endpoint.clone()));
+            }
+        }
+
+        /// Retrieves `EndpointData` and builds a new state for the export request module.
+        fn update_export_pane(&self) {
+            if let Ok(data) = self.extract_endpoint() {
+                self.export_pane_load_endpoint_data(&data);
+            }
+        }
+
+        /// Connect ourself to every widget in order to pass new data and rehydrate the
+        /// export pane module so it gets realtime, maybe we should consider doing some
+        /// kind of reactive bindings?
+        fn configure_export_pane_bindings(&self) {
+            self.request_method.connect_changed(
+                glib::clone!(@weak self as pane => move |_| pane.update_export_pane()),
+            );
+            self.request_url.connect_changed(
+                glib::clone!(@weak self as pane => move |_| pane.update_export_pane()),
+            );
+            self.payload_pane.connect_changed(
+                glib::clone!(@weak self as pane => move |_| pane.update_export_pane()),
+            );
+            self.export_pane.connect_changed(
+                glib::clone!(@weak self as pane => move |_| pane.update_export_pane()),
+            );
+            self.header_pane.connect_changed(
+                glib::clone!(@weak self as pane => move |_| pane.update_export_pane()),
+            );
+            self.variable_pane.connect_changed(
+                glib::clone!(@weak self as pane => move |_| pane.update_export_pane()),
+            );
         }
 
         /// Sets the value of every widget in the pane into whatever is set by the given endpoint.
@@ -255,8 +316,7 @@ mod imp {
             self.header_pane.set_entries(&headers);
             self.variable_pane.set_entries(&variables);
             self.payload_pane.set_payload(&endpoint.body);
-            self.export_pane
-                .set_request_export_type(&RequestExportType::None);
+            self.export_pane_load_endpoint_data(endpoint);
         }
 
         /// Takes the current state of the pane and extracts it into an Endpoint value.

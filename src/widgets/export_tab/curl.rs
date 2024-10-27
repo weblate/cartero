@@ -17,7 +17,7 @@
 
 use glib::object::ObjectExt;
 
-use crate::entities::RequestExportType;
+use crate::entities::{EndpointData, RequestExportType};
 
 use super::BaseExportPaneExt;
 
@@ -31,7 +31,7 @@ mod imp {
     use gtk::subclass::prelude::*;
     use gtk::{gio::SettingsBindFlags, CompositeTemplate};
     use gtk::{prelude::*, WrapMode};
-    use sourceview5::prelude::*;
+    use sourceview5::{prelude::*, LanguageManager};
     use sourceview5::{Buffer, StyleSchemeManager, View};
 
     use crate::app::CarteroApplication;
@@ -114,10 +114,14 @@ mod imp {
             ExportType::Curl
         }
 
-        fn set_format(&self, _format: ExportType) {
-            // currently we dont have a way to set format for this thing
-            // see: `self.format()`.
-            unimplemented!();
+        fn set_format(&self, format: ExportType) {
+            let manager = LanguageManager::default();
+            let language = match format {
+                ExportType::Curl => manager.language("shell"),
+                _ => None,
+            };
+
+            self.buffer.set_language(language.as_ref());
         }
 
         fn init_settings(&self) {
@@ -223,15 +227,18 @@ impl CurlExportPane {
 
 impl BaseExportPaneExt for CurlExportPane {
     fn request_export_type(&self) -> RequestExportType {
-        // we do it this way since we only have curl format at the moment
-        // see `self.format()` notes.
+        // TODO: Maybe we could extract url and others from the service which is
+        // gonna generate curl output or idk, like reparse the generated content
+        // to extract its data and regenerate a new endpoint data.
         match self.format() {
-            super::ExportType::Curl => RequestExportType::Curl,
-            _ => RequestExportType::Curl,
+            super::ExportType::Curl => RequestExportType::Curl(EndpointData::default()),
+            _ => RequestExportType::None,
         }
     }
 
-    fn set_request_export_type(&self, _req_export_type: &RequestExportType) {
-        // we've nothing to set here yet.
+    fn set_request_export_type(&self, req_export_type: &RequestExportType) {
+        if let RequestExportType::Curl(data) = req_export_type {
+            println!("{:?}", data);
+        }
     }
 }
