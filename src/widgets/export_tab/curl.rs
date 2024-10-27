@@ -15,11 +15,11 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-use glib::object::ObjectExt;
+use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
 
 use crate::entities::{EndpointData, RequestExportType};
 
-use super::BaseExportPaneExt;
+use super::{BaseExportPaneExt, CurlService};
 
 mod imp {
     use std::cell::RefCell;
@@ -78,11 +78,6 @@ mod imp {
             self.parent_constructed();
             self.init_settings();
             self.init_source_view_style();
-
-            self.buffer
-                .connect_changed(glib::clone!(@weak self as pane => move |_| {
-                    pane.obj().emit_by_name::<()>("changed", &[]);
-                }));
         }
     }
 
@@ -238,7 +233,10 @@ impl BaseExportPaneExt for CurlExportPane {
 
     fn set_request_export_type(&self, req_export_type: &RequestExportType) {
         if let RequestExportType::Curl(data) = req_export_type {
-            println!("{:?}", data);
+            let service = CurlService::new(data.clone());
+            let imp = self.imp();
+
+            imp.set_buffer_content(service.generate().as_bytes());
         }
     }
 }

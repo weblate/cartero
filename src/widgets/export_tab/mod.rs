@@ -18,7 +18,9 @@
 mod base;
 mod curl;
 mod tab;
+mod service;
 
 pub use base::*;
 pub use curl::*;
 pub use tab::*;
+pub use service::*;
