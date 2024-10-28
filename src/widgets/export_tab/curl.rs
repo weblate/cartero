@@ -111,8 +111,11 @@ mod imp {
 
         fn set_format(&self, format: ExportType) {
             let manager = LanguageManager::default();
+
+            // TODO: I'm not really sure what the language id should be here,
+            // already tried bash shellscript sh shell etc.
             let language = match format {
-                ExportType::Curl => manager.language("shell"),
+                ExportType::Curl => manager.language("shellscript"),
                 _ => None,
             };
 
@@ -236,7 +239,9 @@ impl BaseExportPaneExt for CurlExportPane {
             let service = CurlService::new(data.clone());
             let imp = self.imp();
 
-            imp.set_buffer_content(service.generate().as_bytes());
+            if let Ok(command) = service.generate() {
+                imp.set_buffer_content(command.as_bytes());
+            }
         }
     }
 }

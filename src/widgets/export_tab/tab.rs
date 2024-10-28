@@ -131,13 +131,8 @@ mod imp {
             };
 
             self.stack.set_visible_child_name(tab);
-
             self.sep.set_visible(export_type != ExportType::None);
-
-            // this may be useful if in a future we're gonna reutilize this component
-            // for exporting into code like axios etc, for now, just let this here
-            // commented. see: `self.curl.format()`.
-            // self.curl.set_format(export_type);
+            self.curl.set_format(export_type);
         }
 
         pub fn export_type(&self) -> ExportType {
