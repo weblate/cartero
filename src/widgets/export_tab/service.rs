@@ -21,11 +21,11 @@ use crate::client::BoundRequest;
 use crate::entities::{EndpointData, RequestPayload};
 use crate::error::CarteroError;
 
-pub struct CurlService {
+pub struct CodeExportService {
     endpoint_data: EndpointData,
 }
 
-impl CurlService {
+impl CodeExportService {
     pub fn new(endpoint_data: EndpointData) -> Self {
         Self { endpoint_data }
     }

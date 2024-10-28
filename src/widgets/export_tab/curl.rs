@@ -19,7 +19,7 @@ use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
 
 use crate::entities::{EndpointData, RequestExportType};
 
-use super::{BaseExportPaneExt, CurlService};
+use super::{BaseExportPaneExt, CodeExportService};
 
 mod imp {
     use std::cell::RefCell;
@@ -236,7 +236,7 @@ impl BaseExportPaneExt for CurlExportPane {
 
     fn set_request_export_type(&self, req_export_type: &RequestExportType) {
         if let RequestExportType::Curl(data) = req_export_type {
-            let service = CurlService::new(data.clone());
+            let service = CodeExportService::new(data.clone());
             let imp = self.imp();
 
             if let Ok(command) = service.generate() {
