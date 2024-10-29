@@ -27,7 +27,7 @@ blueprint_files = [
   'ui/payload_tab.blp',
   'ui/export_tab.blp',
   'ui/raw_payload_pane.blp',
-  'ui/curl_export_pane.blp',
+  'ui/code_export_pane.blp',
   'ui/response_headers.blp',
   'ui/response_panel.blp',
   'ui/save_dialog.blp',

@@ -22,7 +22,7 @@ use gtk::subclass::prelude::*;
 
 use crate::entities::RequestExportType;
 
-use super::{BaseExportPaneExt, CurlExportPane};
+use super::{BaseExportPaneExt, CodeExportPane};
 
 #[derive(Debug, Copy, Clone, Default, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "CarteroExportType")]
@@ -53,7 +53,7 @@ mod imp {
     use gtk::{CompositeTemplate, Stack};
 
     use crate::widgets::BaseExportPane;
-    use crate::widgets::CurlExportPane;
+    use crate::widgets::CodeExportPane;
 
     use super::ExportType;
 
@@ -71,7 +71,7 @@ mod imp {
         sep: TemplateChild<Separator>,
 
         #[template_child]
-        curl: TemplateChild<CurlExportPane>,
+        code: TemplateChild<CodeExportPane>,
 
         #[property(get = Self::export_type, set = Self::set_export_type, builder(ExportType::default()))]
         _payload_type: RefCell<ExportType>,
@@ -104,7 +104,7 @@ mod imp {
                     pane.obj().emit_by_name::<()>("changed", &[]);
                 }));
 
-            self.curl
+            self.code
                 .connect_changed(glib::clone!(@weak self as pane => move |_| {
                     pane.obj().emit_by_name::<()>("changed", &[]);
                 }));
@@ -127,12 +127,12 @@ mod imp {
             let export_type = self.export_type();
             let tab = match export_type {
                 ExportType::None => "none",
-                ExportType::Curl => "curl",
+                ExportType::Curl => "code",
             };
 
             self.stack.set_visible_child_name(tab);
             self.sep.set_visible(export_type != ExportType::None);
-            self.curl.set_format(export_type);
+            self.code.set_format(export_type);
         }
 
         pub fn export_type(&self) -> ExportType {
@@ -148,7 +148,7 @@ mod imp {
         pub(super) fn get_active_widget(&self) -> Option<BaseExportPane> {
             match self.export_type() {
                 ExportType::None => None,
-                ExportType::Curl => Some(self.curl.upcast_ref::<BaseExportPane>().clone()),
+                ExportType::Curl => Some(self.code.upcast_ref::<BaseExportPane>().clone()),
             }
         }
     }
@@ -184,7 +184,7 @@ impl ExportTab {
         match imp.export_type() {
             ExportType::None => {}
             ExportType::Curl => {
-                let widget = widget.and_downcast::<CurlExportPane>().unwrap();
+                let widget = widget.and_downcast::<CodeExportPane>().unwrap();
                 widget.set_request_export_type(req_export_type);
             }
         }
@@ -197,7 +197,7 @@ impl ExportTab {
         match imp.export_type() {
             ExportType::None => RequestExportType::None,
             ExportType::Curl => {
-                let widget = widget.and_downcast::<CurlExportPane>().unwrap();
+                let widget = widget.and_downcast::<CodeExportPane>().unwrap();
                 widget.request_export_type()
             }
         }

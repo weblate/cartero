@@ -16,11 +16,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 mod base;
-mod curl;
+mod code;
 mod service;
 mod tab;
 
 pub use base::*;
-pub use curl::*;
+pub use code::*;
 pub use service::*;
 pub use tab::*;

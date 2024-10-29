@@ -38,9 +38,9 @@ mod imp {
     use crate::widgets::{BaseExportPane, BaseExportPaneImpl, ExportType};
 
     #[derive(Default, CompositeTemplate, Properties)]
-    #[properties(wrapper_type = super::CurlExportPane)]
-    #[template(resource = "/es/danirod/Cartero/curl_export_pane.ui")]
-    pub struct CurlExportPane {
+    #[properties(wrapper_type = super::CodeExportPane)]
+    #[template(resource = "/es/danirod/Cartero/code_export_pane.ui")]
+    pub struct CodeExportPane {
         #[template_child]
         view: TemplateChild<View>,
 
@@ -52,10 +52,10 @@ mod imp {
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for CurlExportPane {
-        const NAME: &'static str = "CarteroCurlExportPane";
+    impl ObjectSubclass for CodeExportPane {
+        const NAME: &'static str = "CarteroCodeExportPane";
 
-        type Type = super::CurlExportPane;
+        type Type = super::CodeExportPane;
         type ParentType = BaseExportPane;
 
         fn class_init(klass: &mut Self::Class) {
@@ -68,7 +68,7 @@ mod imp {
     }
 
     #[glib::derived_properties]
-    impl ObjectImpl for CurlExportPane {
+    impl ObjectImpl for CodeExportPane {
         fn signals() -> &'static [Signal] {
             static SIGNALS: OnceLock<Vec<Signal>> = OnceLock::new();
             SIGNALS.get_or_init(|| vec![Signal::builder("changed").build()])
@@ -81,13 +81,13 @@ mod imp {
         }
     }
 
-    impl WidgetImpl for CurlExportPane {}
+    impl WidgetImpl for CodeExportPane {}
 
-    impl BinImpl for CurlExportPane {}
+    impl BinImpl for CodeExportPane {}
 
-    impl BaseExportPaneImpl for CurlExportPane {}
+    impl BaseExportPaneImpl for CodeExportPane {}
 
-    impl CurlExportPane {
+    impl CodeExportPane {
         #[allow(unused)]
         pub(super) fn buffer_content(&self) -> Vec<u8> {
             let (start, end) = self.buffer.bounds();
@@ -206,12 +206,12 @@ mod imp {
 }
 
 glib::wrapper! {
-    pub struct CurlExportPane(ObjectSubclass<imp::CurlExportPane>)
+    pub struct CodeExportPane(ObjectSubclass<imp::CodeExportPane>)
         @extends gtk::Widget, adw::Bin, super::BaseExportPane,
         @implements gtk::Accessible, gtk::Buildable;
 }
 
-impl CurlExportPane {
+impl CodeExportPane {
     pub fn connect_changed<F: Fn(&Self) + 'static>(&self, f: F) -> glib::SignalHandlerId {
         self.connect_closure(
             "changed",
@@ -223,7 +223,7 @@ impl CurlExportPane {
     }
 }
 
-impl BaseExportPaneExt for CurlExportPane {
+impl BaseExportPaneExt for CodeExportPane {
     fn request_export_type(&self) -> RequestExportType {
         // TODO: Maybe we could extract url and others from the service which is
         // gonna generate curl output or idk, like reparse the generated content
