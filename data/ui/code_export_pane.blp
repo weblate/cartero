@@ -39,11 +39,12 @@ template $CarteroCodeExportPane: $CarteroBaseExportPane {
       }
 
       [overlay]
-      Gtk.Button {
+      Gtk.Button copy_button {
         valign: end;
         halign: end;
         margin-end: 10;
         margin-bottom: 10;
+        clicked => $on_copy_button_clicked() swapped;
 
         Gtk.Box {
           orientation: horizontal;

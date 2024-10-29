@@ -28,9 +28,10 @@ mod imp {
     use adw::subclass::bin::BinImpl;
     use glib::subclass::{InitializingObject, Signal};
     use glib::Properties;
+    use gtk::gdk::Display;
     use gtk::subclass::prelude::*;
     use gtk::{gio::SettingsBindFlags, CompositeTemplate};
-    use gtk::{prelude::*, WrapMode};
+    use gtk::{prelude::*, template_callbacks, Button, WrapMode};
     use sourceview5::{prelude::*, LanguageManager};
     use sourceview5::{Buffer, StyleSchemeManager, View};
 
@@ -47,6 +48,9 @@ mod imp {
         #[template_child]
         buffer: TemplateChild<Buffer>,
 
+        #[template_child]
+        copy_button: TemplateChild<Button>,
+
         #[property(get = Self::format, set = Self::set_format, builder(ExportType::default()))]
         _format: RefCell<ExportType>,
     }
@@ -60,6 +64,7 @@ mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
+            klass.bind_template_callbacks();
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {
@@ -87,7 +92,18 @@ mod imp {
 
     impl BaseExportPaneImpl for CodeExportPane {}
 
+    #[template_callbacks]
     impl CodeExportPane {
+        #[template_callback]
+        fn on_copy_button_clicked(&self) {
+            if let Some(display) = Display::default() {
+                let clipboard = display.clipboard();
+                let buf_contents = self.buffer_content();
+                let contents = String::from_utf8_lossy(buf_contents.as_ref());
+                clipboard.set_text(contents.as_ref());
+            }
+        }
+
         #[allow(unused)]
         pub(super) fn buffer_content(&self) -> Vec<u8> {
             let (start, end) = self.buffer.bounds();
