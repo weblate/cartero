@@ -61,7 +61,13 @@ impl CodeExportService {
             }
         }
 
-        // TODO: Add support for multipart and others.
+        if let RequestPayload::Urlencoded(_) = &self.endpoint_data.body {
+            if let Some(bd) = bound_request.body {
+                let str = String::from_utf8_lossy(&bd).to_string();
+                command.push_str(&*format!(" \\\n  -d '{str}'"));
+            }
+        }
+
         if let RequestPayload::Raw {
             encoding: _,
             content,
