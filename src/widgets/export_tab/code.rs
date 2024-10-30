@@ -37,6 +37,7 @@ mod imp {
 
     use crate::app::CarteroApplication;
     use crate::widgets::{BaseExportPane, BaseExportPaneImpl, ExportType};
+    use crate::win::CarteroWindow;
 
     #[derive(Default, CompositeTemplate, Properties)]
     #[properties(wrapper_type = super::CodeExportPane)]
@@ -101,6 +102,15 @@ mod imp {
                 let buf_contents = self.buffer_content();
                 let contents = String::from_utf8_lossy(buf_contents.as_ref());
                 clipboard.set_text(contents.as_ref());
+
+                let app = CarteroApplication::get();
+
+                let window = match app.active_window() {
+                    Some(window) => window.downcast::<CarteroWindow>().unwrap(),
+                    None => CarteroWindow::new(&app),
+                };
+
+                window.toast_message("Content copied to the clipboard");
             }
         }
 
