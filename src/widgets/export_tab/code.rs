@@ -26,6 +26,7 @@ mod imp {
     use std::sync::OnceLock;
 
     use adw::subclass::bin::BinImpl;
+    use gettextrs::gettext;
     use glib::subclass::{InitializingObject, Signal};
     use glib::Properties;
     use gtk::gdk::Display;
@@ -110,7 +111,7 @@ mod imp {
                     None => CarteroWindow::new(&app),
                 };
 
-                window.toast_message("Content copied to the clipboard");
+                window.toast_message(&gettext("Content copied to the clipboard"));
             }
         }
 

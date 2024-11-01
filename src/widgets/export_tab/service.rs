@@ -36,7 +36,7 @@ impl CodeExportService {
 
         command.push_str(&{
             let method_str: String = bound_request.method.into();
-            format!(" -X {} {}", method_str, bound_request.url)
+            format!(" -X {} '{}'", method_str, bound_request.url)
         });
 
         if !bound_request.headers.is_empty() {
