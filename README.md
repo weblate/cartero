@@ -206,6 +206,8 @@ home.packages = with pkgs; [
 > 🐛 This project is currently a larva trying to grow. Do you want to get in?
 > Take a seat!
 
+### Contributing with code
+
 This project is highly appreciative of contributions. If you know about Rust,
 GTK or the GNOME technologies and want to help during the development, you can
 contribute if you wish. [Fork the project][fork] and commit your code.
@@ -237,6 +239,20 @@ make it fit inside the application.
 While this application is not official and at the moment is not affiliated with
 GNOME, you are expected to follow the [GNOME Code of Conduct][coc] when
 interacting with this repository.
+
+### Contributing with translations
+
+Do you want to use Cartero in your language? We are using [Weblate][weblate]
+to coordinate and translate comfortably this project using a web interface.
+Make an account and start proposing strings and they will be added to the
+application. That will also entitle you as a contributor!
+
+### Contributing with feedback
+
+Cartero is still getting new features, and hopes to be as useful as it can be.
+Found a bug or something is wrong? Report it. An use case you are missing?
+Report it. Show us how you integrate Cartero on your workflow so that we can
+build our diverse list of use cases.
 
 ## Licenses
 
@@ -285,6 +301,7 @@ Dani's [dev blog][blog] (in Spanish) of Cartero.
 [danirod]: https://github.com/danirod
 [fork]: https://github.com/danirod/cartero/fork
 [blog]: https://danirod.es/secciones/devlogs/cartero/
+[weblate]: https://hosted.weblate.org/projects/cartero/
 [windows-x86_64]: https://github.com/danirod/cartero/releases/download/v0.1.2/Cartero-0.1.2b-windows-x64.exe
 [macos-sillicon]: https://github.com/danirod/cartero/releases/download/v0.1.2/Cartero-0.1.2-macOS-ARM64.dmg
 [macos-intel]: https://github.com/danirod/cartero/releases/download/v0.1.2/Cartero-0.1.2-macOS-Intel.dmg
