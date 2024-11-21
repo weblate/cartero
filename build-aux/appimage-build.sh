@@ -44,5 +44,8 @@ export DEPLOY_GTK_VERSION
 sed -i '/GTK_THEME/d' AppDir/apprun-hooks/linuxdeploy-plugin-gtk.sh
 sed -i '/GDK_BACKEND/d' AppDir/apprun-hooks/linuxdeploy-plugin-gtk.sh
 
+# Extra fixes for the icon theme.
+gtk4-update-icon-cache -q -t -f AppDir/usr/share/icons/hicolor
+
 # Recompile with the changes.
 ./appimagetool-x86_64.AppImage AppDir
