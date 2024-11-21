@@ -30,6 +30,11 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build
       run: build-aux/appimage-build.sh stable
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: es.danirod.Cartero-AppImage
+        path: build/appimagetool/Cartero-x86_64.AppImage
   devel:
     name: Build (development profile)
     runs-on: ubuntu-24.04
@@ -39,3 +44,8 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build
       run: build-aux/appimage-build.sh devel
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: es.danirod.Cartero.Devel-AppImage
+        path: build/appimagetool/Cartero-x86_64.AppImage
