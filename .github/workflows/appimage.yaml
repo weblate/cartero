@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
     - name: Install dependencies
-      run: sudo apt update && sudo apt install -y --no-install-recommends gettext meson libgtk-4-dev libadwaita-1-dev libgtksourceview-5-dev desktop-file-utils xvfb
+      run: sudo apt update && sudo apt install -y --no-install-recommends gettext meson libgtk-4-dev libadwaita-1-dev libgtksourceview-5-dev desktop-file-utils xvfb libfuse2
     - uses: actions/checkout@v4
     - name: Build
       run: build-aux/appimage-build.sh stable
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
     - name: Install dependencies
-      run: sudo apt update && sudo apt install -y --no-install-recommends gettext meson libgtk-4-dev libadwaita-1-dev libgtksourceview-5-dev desktop-file-utils xvfb
+      run: sudo apt update && sudo apt install -y --no-install-recommends gettext meson libgtk-4-dev libadwaita-1-dev libgtksourceview-5-dev desktop-file-utils xvfb libfuse2
     - uses: actions/checkout@v4
     - name: Build
       run: build-aux/appimage-build.sh devel
