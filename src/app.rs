@@ -23,6 +23,7 @@ use gtk::prelude::ActionMapExtManual;
 
 use crate::config::{APP_ID, BASE_ID, RESOURCE_PATH};
 use crate::win::CarteroWindow;
+use crate::windows::SettingsDialog;
 
 #[macro_export]
 macro_rules! accelerator {
@@ -87,6 +88,7 @@ mod imp {
             obj.set_accels_for_action("win.save-as", &[accelerator!("<Shift>s")]);
             obj.set_accels_for_action("win.close", &[accelerator!("w")]);
             obj.set_accels_for_action("win.request", &[accelerator!("Return")]);
+            obj.set_accels_for_action("app.settings", &[accelerator!("comma")]);
             obj.set_accels_for_action("app.quit", &[accelerator!("q")]);
             obj.set_accels_for_action("win.show-help-overlay", &[accelerator!("question")]);
             obj.setup_app_actions();
@@ -150,6 +152,13 @@ impl CarteroApplication {
     }
 
     fn setup_app_actions(&self) {
+        let settings = ActionEntryBuilder::new("settings")
+            .activate(glib::clone!(@weak self as app => move |_, _, _| {
+                if let Some(window) = app.active_window() {
+                    SettingsDialog::present_for_window(&window);
+                }
+            }))
+            .build();
         let quit = ActionEntryBuilder::new("quit")
             .activate(glib::clone!(@weak self as app => move |_, _, _| {
                 for window in app.windows() {
@@ -162,6 +171,6 @@ impl CarteroApplication {
             }))
             .build();
 
-        self.add_action_entries([quit]);
+        self.add_action_entries([settings, quit]);
     }
 }

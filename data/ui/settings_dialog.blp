@@ -1,0 +1,61 @@
+/*
+ * Copyright 2024 the Cartero authors
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+// SPDX-License-Identifier: GPL-3.0-or-later
+using Gtk 4.0;
+using Adw 1;
+
+template $CarteroSettingsDialog: Adw.PreferencesDialog {
+  title: _("Settings");
+  content-width: 480;
+  content-height: 640;
+  width-request: 360;
+  height-request: 480;
+  search-enabled: false;
+
+  Adw.PreferencesPage {
+    title: _("General");
+    icon-name: "applications-system";
+
+    Adw.PreferencesGroup {
+      title: "HTTP client settings";
+      description: "Settings used when performing HTTP requests.";
+
+      Adw.SwitchRow option_validate_tls {
+        title: "Enforce TLS validation";
+        subtitle: "If disabled, invalid TLS certificates will not fail a request.";
+      }
+
+      Adw.ExpanderRow option_follow_redirects {
+        title: "Follow redirects";
+        subtitle: "If enabled, a responses that return HTTP 3xx will be chained.";
+        show-enable-switch: true;
+        enable-expansion: true;
+
+        Adw.SpinRow option_maximum_redirects {
+          title: "Maximum redirects";
+
+          adjustment: Gtk.Adjustment {
+            lower: 1;
+            upper: 1000;
+            value: 1;
+            step-increment: 1;
+          };
+        }
+      }
+    }
+  }
+}
