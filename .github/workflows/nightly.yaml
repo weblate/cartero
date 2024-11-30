@@ -89,7 +89,7 @@ jobs:
   macos:
     strategy:
       matrix:
-        os: [macos-13, macos-14]
+        os: [macos-13, macos-14, macos-15]
       fail-fast: false
     name: "macOS (${{ matrix.os }})"
     runs-on: ${{ matrix.os }}
@@ -106,7 +106,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       name: Upload macOS version
       with:
-        name: es.danirod.Cartero-${{ runner.os }}-${{ runner.arch }}
+        name: es.danirod.Cartero-${{ matrix.os }}-${{ runner.arch }}
         path: build/Cartero-*.dmg
   appimage:
     name: "AppImage (GNU/Linux, glibc 2.38+)"
