@@ -15,11 +15,16 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-use crate::entities::{RequestMethod, ResponseData};
+use crate::{
+    app::CarteroApplication,
+    entities::{RequestMethod, ResponseData},
+};
 
 use super::{BoundRequest, RequestError};
 use futures_lite::io::AsyncReadExt;
+use gtk::prelude::SettingsExt;
 use isahc::{
+    config::{Configurable, SslOption},
     http::{HeaderName, HeaderValue},
     AsyncBody, Body,
 };
@@ -45,6 +50,24 @@ impl TryFrom<BoundRequest> for isahc::Request<Vec<u8>> {
 
     fn try_from(req: BoundRequest) -> Result<Self, Self::Error> {
         let mut builder = isahc::Request::builder().uri(&req.url).method(&req.method);
+
+        let app = CarteroApplication::default();
+        let settings = app.settings();
+
+        if settings.boolean("validate-tls") {
+            builder = builder.ssl_options(SslOption::NONE);
+        } else {
+            builder = builder.ssl_options(SslOption::DANGER_ACCEPT_INVALID_CERTS);
+        }
+
+        if settings.boolean("follow-redirects") {
+            let count = settings.uint("maximum-redirects");
+            println!("count = {count}");
+            builder = builder.redirect_policy(isahc::config::RedirectPolicy::Limit(count));
+        } else {
+            builder = builder.redirect_policy(isahc::config::RedirectPolicy::None);
+        }
+
         let Some(headers) = builder.headers_mut() else {
             return Err(RequestError::InvalidHeaders);
         };

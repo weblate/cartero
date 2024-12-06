@@ -22,7 +22,9 @@ use gtk::gio;
 mod imp {
     use adw::subclass::prelude::*;
     use glib::subclass::InitializingObject;
-    use gtk::{template_callbacks, CompositeTemplate, TemplateChild};
+    use gtk::{prelude::SettingsExtManual, template_callbacks, CompositeTemplate, TemplateChild};
+
+    use crate::app::CarteroApplication;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/es/danirod/Cartero/settings_dialog.ui")]
@@ -53,7 +55,12 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for SettingsDialog {}
+    impl ObjectImpl for SettingsDialog {
+        fn constructed(&self) {
+            self.parent_constructed();
+            self.init_settings();
+        }
+    }
 
     impl WidgetImpl for SettingsDialog {}
 
@@ -64,7 +71,30 @@ mod imp {
     impl PreferencesDialogImpl for SettingsDialog {}
 
     #[template_callbacks]
-    impl SettingsDialog {}
+    impl SettingsDialog {
+        fn init_settings(&self) {
+            let app = CarteroApplication::default();
+            let settings = app.settings();
+
+            settings
+                .bind("validate-tls", &*self.option_validate_tls, "active")
+                .build();
+            settings
+                .bind(
+                    "follow-redirects",
+                    &*self.option_follow_redirects,
+                    "enable-expansion",
+                )
+                .build();
+            settings
+                .bind(
+                    "maximum-redirects",
+                    &*self.option_maximum_redirects,
+                    "value",
+                )
+                .build();
+        }
+    }
 }
 
 glib::wrapper! {

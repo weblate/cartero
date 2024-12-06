@@ -50,5 +50,17 @@
       <default>nothing</default>
       <summary>The last location where a file was saved</summary>
     </key>
+    <key name="validate-tls" type="b">
+      <default>true</default>
+      <summary>Whether to validate the TLS certificates during a request</summary>
+    </key>
+    <key name="follow-redirects" type="b">
+      <default>false</default>
+      <summary>Whether to follow redirections if that is the server response</summary>
+    </key>
+    <key name="maximum-redirects" type="u">
+      <default>5</default>
+      <summary>Maximum number of redirections to follow before giving up</summary>
+    </key>
   </schema>
 </schemalist>
