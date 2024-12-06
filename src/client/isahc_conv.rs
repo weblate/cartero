@@ -28,7 +28,11 @@ use isahc::{
     http::{HeaderName, HeaderValue},
     AsyncBody, Body,
 };
-use std::{io::Read, str::FromStr, time::Instant};
+use std::{
+    io::Read,
+    str::FromStr,
+    time::{Duration, Instant},
+};
 
 impl From<&RequestMethod> for isahc::http::Method {
     fn from(value: &RequestMethod) -> Self {
@@ -62,11 +66,13 @@ impl TryFrom<BoundRequest> for isahc::Request<Vec<u8>> {
 
         if settings.boolean("follow-redirects") {
             let count = settings.uint("maximum-redirects");
-            println!("count = {count}");
             builder = builder.redirect_policy(isahc::config::RedirectPolicy::Limit(count));
         } else {
             builder = builder.redirect_policy(isahc::config::RedirectPolicy::None);
         }
+
+        let timeout = settings.double("request-timeout");
+        builder = builder.timeout(Duration::from_secs_f64(timeout));
 
         let Some(headers) = builder.headers_mut() else {
             return Err(RequestError::InvalidHeaders);

@@ -62,5 +62,9 @@
       <default>5</default>
       <summary>Maximum number of redirections to follow before giving up</summary>
     </key>
+    <key name="request-timeout" type="d">
+      <default>30</default>
+      <summary>Maximum timeout when awaiting for an HTTP response.</summary>
+    </key>
   </schema>
 </schemalist>

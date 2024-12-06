@@ -37,6 +37,9 @@ mod imp {
 
         #[template_child]
         option_maximum_redirects: TemplateChild<adw::SpinRow>,
+
+        #[template_child]
+        option_timeout: TemplateChild<adw::SpinRow>,
     }
 
     #[glib::object_subclass]
@@ -92,6 +95,9 @@ mod imp {
                     &*self.option_maximum_redirects,
                     "value",
                 )
+                .build();
+            settings
+                .bind("request-timeout", &*self.option_timeout, "value")
                 .build();
         }
     }

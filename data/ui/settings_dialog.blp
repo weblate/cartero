@@ -56,6 +56,18 @@ template $CarteroSettingsDialog: Adw.PreferencesDialog {
           };
         }
       }
+
+      Adw.SpinRow option_timeout {
+        title: "Request timeout";
+        digits: 3;
+
+        adjustment: Gtk.Adjustment {
+          lower: 0;
+          upper: 1000;
+          value: 5.0;
+          step-increment: 0.1;
+        };
+      }
     }
   }
 }
