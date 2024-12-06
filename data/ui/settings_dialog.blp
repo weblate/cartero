@@ -69,5 +69,38 @@ template $CarteroSettingsDialog: Adw.PreferencesDialog {
         };
       }
     }
+
+    Adw.PreferencesGroup {
+      title: "Appearance";
+      description: "Display settings.";
+
+      Adw.ComboRow option_theme {
+        title: "Application theme";
+        subtitle: "The style to use in the application";
+
+        model: Gtk.StringList {
+          strings [
+            "Follow system settings",
+            "Light mode",
+            "Dark mode",
+          ]
+        };
+      }
+
+      /*
+      Adw.SwitchRow option_use_custom_font {
+        title: "Use custom font";
+      }
+      
+      Adw.ActionRow {
+        title: "Custom font";
+        
+        Gtk.FontDialogButton option_custom_font {
+          styles ["flat"]
+          vexpand: false;
+          valign: center;
+        }
+      }*/
+    }
   }
 }

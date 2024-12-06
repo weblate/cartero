@@ -92,6 +92,7 @@ mod imp {
             obj.set_accels_for_action("app.quit", &[accelerator!("q")]);
             obj.set_accels_for_action("win.show-help-overlay", &[accelerator!("question")]);
             obj.setup_app_actions();
+            obj.setup_color_scheme();
         }
 
         fn open(&self, files: &[gio::File], hint: &str) {
@@ -149,6 +150,21 @@ impl CarteroApplication {
 
     pub fn settings(&self) -> &Settings {
         self.imp().settings.get_or_init(|| Settings::new(BASE_ID))
+    }
+
+    fn setup_color_scheme(&self) {
+        let settings = self.settings();
+        settings
+            .bind("application-theme", &self.style_manager(), "color-scheme")
+            .mapping(|val, _| {
+                let scheme = match val.get::<String>().unwrap().as_str() {
+                    "light" => adw::ColorScheme::ForceLight,
+                    "dark" => adw::ColorScheme::ForceDark,
+                    _ => adw::ColorScheme::Default,
+                };
+                Some(scheme.into())
+            })
+            .build();
     }
 
     fn setup_app_actions(&self) {

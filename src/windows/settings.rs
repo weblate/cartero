@@ -40,6 +40,16 @@ mod imp {
 
         #[template_child]
         option_timeout: TemplateChild<adw::SpinRow>,
+
+        #[template_child]
+        option_theme: TemplateChild<adw::ComboRow>,
+        /*
+                #[template_child]
+                option_use_custom_font: TemplateChild<adw::SwitchRow>,
+
+                #[template_child]
+                option_custom_font: TemplateChild<gtk::FontDialogButton>,
+        */
     }
 
     #[glib::object_subclass]
@@ -98,6 +108,28 @@ mod imp {
                 .build();
             settings
                 .bind("request-timeout", &*self.option_timeout, "value")
+                .build();
+
+            settings
+                .bind("application-theme", &*self.option_theme, "selected")
+                .mapping(|variant, _| {
+                    let value = variant.get::<String>().expect("Expected a string");
+                    let index: i32 = match value.as_str() {
+                        "light" => 1,
+                        "dark" => 2,
+                        _ => 0,
+                    };
+                    Some(index.into())
+                })
+                .set_mapping(|value, _| {
+                    let index = value.get::<u32>().expect("What the heck");
+                    let setting = match index {
+                        1 => "light",
+                        2 => "dark",
+                        _ => "system",
+                    };
+                    Some(setting.into())
+                })
                 .build();
         }
     }
