@@ -54,7 +54,7 @@ for lang in $(cat "$CARTERO_ROOT_DIR/po/LINGUAS" | grep -v '^#'); do
                 if [ -f $MINGW_PREFIX/share/locale/$lang/LC_MESSAGES/$pkg.mo ]; then
                         cp -f $MINGW_PREFIX/share/locale/$lang/LC_MESSAGES/$pkg.mo share/locale/$lang/LC_MESSAGES
                 fi
-        end
+        done
 done
 
 cp $(ldd lib/gdk-pixbuf-2.0/2.10.0/loaders/*.dll | grep "$MINGW_PREFIX" | awk '{ print $3 }' | sort | uniq) bin/
