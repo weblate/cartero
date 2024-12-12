@@ -52,7 +52,11 @@ gtk4-update-icon-cache -q -t -f "$RESOURCES_ROOT/share/icons/Adwaita"
 
 # Add extra locales
 for lang in $(cat "po/LINGUAS" | grep -v '^#'); do
-        cp -f $(brew --prefix)/share/locale/$lang/LC_MESSAGES/{gdk-pixbuf,gettext-runtime,glib20,gtk40,gtksourceview-5,libadwaita,shared-mime-info}.mo "$RESOURCES_ROOT/share/locale/$lang/LC_MESSAGES"
+  for pkg in gdk-pixbuf gettext-runtime glib20 gtk40 gtksourceview-5 libadwaita shared-mime-info; do
+    if [ -f $MINGW_PREFIX/share/locale/$lang/LC_MESSAGES/$pkg.mo ]; then
+      cp -f $(brew --prefix)/share/locale/$lang/LC_MESSAGES/$pkg.mo "$RESOURCES_ROOT/share/locale/$lang/LC_MESSAGES"
+    fi
+  done
 done
 
 # Mangle bin directory
