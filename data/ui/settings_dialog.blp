@@ -31,22 +31,22 @@ template $CarteroSettingsDialog: Adw.PreferencesDialog {
     icon-name: "applications-system";
 
     Adw.PreferencesGroup {
-      title: "HTTP client settings";
-      description: "Settings used when performing HTTP requests.";
+      title: _("HTTP client settings");
+      description: _("Settings used when performing HTTP requests.");
 
       Adw.SwitchRow option_validate_tls {
-        title: "Enforce TLS validation";
-        subtitle: "If disabled, invalid TLS certificates will not fail a request.";
+        title: _("Enforce TLS validation");
+        subtitle: _("If disabled, invalid TLS certificates will not fail a request.");
       }
 
       Adw.ExpanderRow option_follow_redirects {
-        title: "Follow redirects";
-        subtitle: "If enabled, a responses that return HTTP 3xx will be chained.";
+        title: _("Follow redirects");
+        subtitle: _("If enabled, a responses that return HTTP 3xx will be chained.");
         show-enable-switch: true;
         enable-expansion: true;
 
         Adw.SpinRow option_maximum_redirects {
-          title: "Maximum redirects";
+          title: _("Maximum redirects");
 
           adjustment: Gtk.Adjustment {
             lower: 1;
@@ -58,7 +58,7 @@ template $CarteroSettingsDialog: Adw.PreferencesDialog {
       }
 
       Adw.SpinRow option_timeout {
-        title: "Request timeout";
+        title: _("Request timeout");
         digits: 3;
 
         adjustment: Gtk.Adjustment {
@@ -71,38 +71,38 @@ template $CarteroSettingsDialog: Adw.PreferencesDialog {
     }
 
     Adw.PreferencesGroup {
-      title: "File settings";
-      description: "Settings related to storage.";
+      title: _("File settings");
+      description: _("Settings related to storage.");
 
       Adw.SwitchRow option_create_backups {
-        title: "Create backup files";
-        subtitle: "You might not want to enable this if you are already using a version control such as Git";
+        title: _("Create backup files");
+        subtitle: _("You might not want to enable this if you are already using a version control such as Git");
       }
     }
 
     Adw.PreferencesGroup {
-      title: "Appearance";
-      description: "Display settings.";
+      title: _("Appearance");
+      description: _("Display settings.");
 
       Adw.ComboRow option_theme {
-        title: "Application theme";
-        subtitle: "The style to use in the application";
+        title: _("Application theme");
+        subtitle: _("The style to use in the application");
 
         model: Gtk.StringList {
           strings [
-            "Follow system settings",
-            "Light mode",
-            "Dark mode",
+            _("Follow system settings"),
+            _("Light mode"),
+            _("Dark mode"),
           ]
         };
       }
 
       Adw.SwitchRow option_use_system_font {
-        title: "Use system font";
+        title: _("Use system font");
       }
 
       Adw.ActionRow {
-        title: "Custom font";
+        title: _("Custom font");
 
         Gtk.FontDialogButton option_custom_font {
           styles [

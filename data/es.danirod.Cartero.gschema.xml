@@ -27,7 +27,6 @@
       <default>'4'</default>
       <summary>How many characters to pad when indenting the request body</summary>
     </key>
-
     <key name="window-width" type="i">
       <default>1024</default>
       <summary>How large should new windows be</summary>
