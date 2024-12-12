@@ -71,6 +71,16 @@ template $CarteroSettingsDialog: Adw.PreferencesDialog {
     }
 
     Adw.PreferencesGroup {
+      title: "File settings";
+      description: "Settings related to storage.";
+
+      Adw.SwitchRow option_create_backups {
+        title: "Create backup files";
+        subtitle: "You might not want to enable this if you are already using a version control such as Git";
+      }
+    }
+
+    Adw.PreferencesGroup {
       title: "Appearance";
       description: "Display settings.";
 

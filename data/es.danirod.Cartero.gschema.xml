@@ -84,5 +84,9 @@
       <default>true</default>
       <summary>Whether to use the system font or a custom one</summary>
     </key>
+    <key name="create-backup-files" type="b">
+      <default>false</default>
+      <summary>Whether to create backup files on save</summary>
+    </key>
   </schema>
 </schemalist>

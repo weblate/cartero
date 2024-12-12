@@ -52,6 +52,9 @@ mod imp {
 
         #[template_child]
         option_custom_font: TemplateChild<gtk::FontDialogButton>,
+
+        #[template_child]
+        option_create_backups: TemplateChild<adw::SwitchRow>,
     }
 
     #[glib::object_subclass]
@@ -110,6 +113,14 @@ mod imp {
                 .build();
             settings
                 .bind("request-timeout", &*self.option_timeout, "value")
+                .build();
+
+            settings
+                .bind(
+                    "create-backup-files",
+                    &*self.option_create_backups,
+                    "active",
+                )
                 .build();
 
             settings
