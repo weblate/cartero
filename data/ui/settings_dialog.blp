@@ -87,20 +87,25 @@ template $CarteroSettingsDialog: Adw.PreferencesDialog {
         };
       }
 
-      /*
-      Adw.SwitchRow option_use_custom_font {
-        title: "Use custom font";
+      Adw.SwitchRow option_use_system_font {
+        title: "Use system font";
       }
-      
+
       Adw.ActionRow {
         title: "Custom font";
-        
+
         Gtk.FontDialogButton option_custom_font {
-          styles ["flat"]
+          styles [
+            "flat"
+          ]
+
+          dialog: font_dialog;
           vexpand: false;
           valign: center;
         }
-      }*/
+      }
     }
   }
 }
+
+Gtk.FontDialog font_dialog {}

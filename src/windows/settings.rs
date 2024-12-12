@@ -21,8 +21,11 @@ use gtk::gio;
 
 mod imp {
     use adw::subclass::prelude::*;
-    use glib::subclass::InitializingObject;
-    use gtk::{prelude::SettingsExtManual, template_callbacks, CompositeTemplate, TemplateChild};
+    use glib::{object::ObjectExt, subclass::InitializingObject};
+    use gtk::{
+        pango::FontDescription, prelude::SettingsExtManual, template_callbacks, CompositeTemplate,
+        TemplateChild,
+    };
 
     use crate::app::CarteroApplication;
 
@@ -43,13 +46,12 @@ mod imp {
 
         #[template_child]
         option_theme: TemplateChild<adw::ComboRow>,
-        /*
-                #[template_child]
-                option_use_custom_font: TemplateChild<adw::SwitchRow>,
 
-                #[template_child]
-                option_custom_font: TemplateChild<gtk::FontDialogButton>,
-        */
+        #[template_child]
+        option_use_system_font: TemplateChild<adw::SwitchRow>,
+
+        #[template_child]
+        option_custom_font: TemplateChild<gtk::FontDialogButton>,
     }
 
     #[glib::object_subclass]
@@ -108,6 +110,28 @@ mod imp {
                 .build();
             settings
                 .bind("request-timeout", &*self.option_timeout, "value")
+                .build();
+
+            settings
+                .bind("use-system-font", &*self.option_use_system_font, "active")
+                .build();
+
+            settings
+                .bind("custom-font", &*self.option_custom_font, "font-desc")
+                .mapping(|variant, _| {
+                    let value = variant.get::<String>().expect("Expected a string");
+                    Some(FontDescription::from_string(value.as_str()).into())
+                })
+                .set_mapping(|value, _| {
+                    let value = value.get::<FontDescription>().expect("What?");
+                    Some(value.to_string().into())
+                })
+                .build();
+
+            self.option_use_system_font
+                .bind_property("active", &*self.option_custom_font, "sensitive")
+                .invert_boolean()
+                .sync_create()
                 .build();
 
             settings

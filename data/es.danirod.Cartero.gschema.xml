@@ -76,5 +76,13 @@
       <default>"system"</default>
       <summary>Whether to use light or dark mode.</summary>
     </key>
+    <key name="custom-font" type="s">
+      <default>"Monospace 11"</default>
+      <summary>The custom font in use</summary>
+    </key>
+    <key name="use-system-font" type="b">
+      <default>true</default>
+      <summary>Whether to use the system font or a custom one</summary>
+    </key>
   </schema>
 </schemalist>
