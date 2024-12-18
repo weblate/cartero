@@ -15,6 +15,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+mod code_view;
 mod endpoint_pane;
 mod export_tab;
 mod file_dialogs;
@@ -27,6 +28,7 @@ mod response_headers;
 mod response_panel;
 mod save_dialog;
 
+pub use code_view::CodeView;
 pub use endpoint_pane::EndpointPane;
 pub use export_tab::*;
 pub use file_dialogs::*;

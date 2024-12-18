@@ -31,13 +31,13 @@ mod imp {
     use glib::Properties;
     use gtk::gdk::Display;
     use gtk::subclass::prelude::*;
-    use gtk::{gio::SettingsBindFlags, CompositeTemplate};
-    use gtk::{prelude::*, template_callbacks, Button, WrapMode};
+    use gtk::CompositeTemplate;
+    use gtk::{prelude::*, template_callbacks, Button};
+    use sourceview5::Buffer;
     use sourceview5::{prelude::*, LanguageManager};
-    use sourceview5::{Buffer, StyleSchemeManager, View};
 
     use crate::app::CarteroApplication;
-    use crate::widgets::{BaseExportPane, BaseExportPaneImpl, ExportType};
+    use crate::widgets::{BaseExportPane, BaseExportPaneImpl, CodeView, ExportType};
     use crate::win::CarteroWindow;
 
     #[derive(Default, CompositeTemplate, Properties)]
@@ -45,7 +45,7 @@ mod imp {
     #[template(resource = "/es/danirod/Cartero/code_export_pane.ui")]
     pub struct CodeExportPane {
         #[template_child]
-        view: TemplateChild<View>,
+        view: TemplateChild<CodeView>,
 
         #[template_child]
         buffer: TemplateChild<Buffer>,
@@ -79,12 +79,6 @@ mod imp {
         fn signals() -> &'static [Signal] {
             static SIGNALS: OnceLock<Vec<Signal>> = OnceLock::new();
             SIGNALS.get_or_init(|| vec![Signal::builder("changed").build()])
-        }
-
-        fn constructed(&self) {
-            self.parent_constructed();
-            self.init_settings();
-            self.init_source_view_style();
         }
     }
 
@@ -147,87 +141,6 @@ mod imp {
             };
 
             self.buffer.set_language(language.as_ref());
-        }
-
-        fn init_settings(&self) {
-            let app = CarteroApplication::get();
-            let settings = app.settings();
-
-            settings
-                .bind("body-wrap", &*self.view, "wrap-mode")
-                .flags(SettingsBindFlags::GET)
-                .mapping(|variant, _| {
-                    let enabled = variant.get::<bool>().expect("The variant is not a boolean");
-                    let mode = match enabled {
-                        true => WrapMode::Word,
-                        false => WrapMode::None,
-                    };
-                    Some(mode.to_value())
-                })
-                .build();
-
-            settings
-                .bind("show-line-numbers", &*self.view, "show-line-numbers")
-                .flags(SettingsBindFlags::GET)
-                .build();
-            settings
-                .bind("auto-indent", &*self.view, "auto-indent")
-                .flags(SettingsBindFlags::GET)
-                .build();
-            settings
-                .bind("indent-style", &*self.view, "insert-spaces-instead-of-tabs")
-                .flags(SettingsBindFlags::GET)
-                .mapping(|variant, _| {
-                    let mode = variant
-                        .get::<String>()
-                        .expect("The variant is not a string");
-                    let use_spaces = mode == "spaces";
-                    Some(use_spaces.to_value())
-                })
-                .build();
-            settings
-                .bind("tab-width", &*self.view, "tab-width")
-                .flags(SettingsBindFlags::GET)
-                .mapping(|variant, _| {
-                    let width = variant.get::<String>().unwrap_or("4".into());
-                    let value = width.parse::<i32>().unwrap_or(4);
-                    Some(value.to_value())
-                })
-                .build();
-            settings
-                .bind("tab-width", &*self.view, "indent-width")
-                .flags(SettingsBindFlags::GET)
-                .mapping(|variant, _| {
-                    let width = variant.get::<String>().unwrap_or("4".into());
-                    let value = width.parse::<i32>().unwrap_or(4);
-                    Some(value.to_value())
-                })
-                .build();
-        }
-
-        fn update_source_view_style(&self) {
-            let dark_mode = adw::StyleManager::default().is_dark();
-            let color_theme = if dark_mode { "Adwaita-dark" } else { "Adwaita" };
-            let theme = StyleSchemeManager::default().scheme(color_theme);
-
-            match theme {
-                Some(theme) => {
-                    self.buffer.set_style_scheme(Some(&theme));
-                    self.buffer.set_highlight_syntax(true);
-                }
-                None => {
-                    self.buffer.set_highlight_syntax(false);
-                }
-            }
-        }
-
-        fn init_source_view_style(&self) {
-            self.update_source_view_style();
-            adw::StyleManager::default().connect_dark_notify(
-                glib::clone!(@weak self as panel => move |_| {
-                    panel.update_source_view_style();
-                }),
-            );
         }
     }
 }

@@ -33,23 +33,18 @@ use glib::subclass::types::ObjectSubclassIsExt;
 mod imp {
     use std::cell::RefCell;
 
+    use crate::widgets::{CodeView, ResponseHeaders};
     use adw::prelude::*;
     use adw::subclass::bin::BinImpl;
     use glib::object::Cast;
     use glib::subclass::InitializingObject;
     use glib::Properties;
-    use gtk::gio::SettingsBindFlags;
     use gtk::subclass::prelude::*;
     use gtk::{
         subclass::widget::{CompositeTemplateClass, CompositeTemplateInitializingExt, WidgetImpl},
         Box, CompositeTemplate, Label, TemplateChild,
     };
-    use gtk::{Spinner, Stack, WrapMode};
-    use sourceview5::prelude::BufferExt;
-    use sourceview5::StyleSchemeManager;
-
-    use crate::app::CarteroApplication;
-    use crate::widgets::ResponseHeaders;
+    use gtk::{Spinner, Stack};
 
     #[derive(CompositeTemplate, Default, Properties)]
     #[properties(wrapper_type = super::ResponsePanel)]
@@ -60,7 +55,7 @@ mod imp {
         #[template_child]
         pub response_headers: TemplateChild<ResponseHeaders>,
         #[template_child]
-        pub response_body: TemplateChild<sourceview5::View>,
+        pub response_body: TemplateChild<CodeView>,
         #[template_child]
         pub response_meta: TemplateChild<Box>,
         #[template_child]
@@ -94,76 +89,13 @@ mod imp {
     }
 
     #[glib::derived_properties]
-    impl ObjectImpl for ResponsePanel {
-        fn constructed(&self) {
-            self.parent_constructed();
-
-            self.init_settings();
-            self.init_source_view_style();
-        }
-    }
+    impl ObjectImpl for ResponsePanel {}
 
     impl WidgetImpl for ResponsePanel {}
 
     impl BinImpl for ResponsePanel {}
 
     impl ResponsePanel {
-        fn init_settings(&self) {
-            let app = CarteroApplication::get();
-            let settings = app.settings();
-
-            settings
-                .bind("body-wrap", &*self.response_body, "wrap-mode")
-                .flags(SettingsBindFlags::GET)
-                .mapping(|variant, _| {
-                    let enabled = variant.get::<bool>().expect("The variant is not a boolean");
-                    let mode = match enabled {
-                        true => WrapMode::WordChar,
-                        false => WrapMode::None,
-                    };
-                    Some(mode.to_value())
-                })
-                .build();
-            settings
-                .bind(
-                    "show-line-numbers",
-                    &*self.response_body,
-                    "show-line-numbers",
-                )
-                .flags(SettingsBindFlags::GET)
-                .build();
-        }
-
-        fn update_source_view_style(&self) {
-            let dark_mode = adw::StyleManager::default().is_dark();
-            let color_theme = if dark_mode { "Adwaita-dark" } else { "Adwaita" };
-            let theme = StyleSchemeManager::default().scheme(color_theme);
-
-            let buffer = self
-                .response_body
-                .buffer()
-                .downcast::<sourceview5::Buffer>()
-                .unwrap();
-            match theme {
-                Some(theme) => {
-                    buffer.set_style_scheme(Some(&theme));
-                    buffer.set_highlight_syntax(true);
-                }
-                None => {
-                    buffer.set_highlight_syntax(false);
-                }
-            }
-        }
-
-        fn init_source_view_style(&self) {
-            self.update_source_view_style();
-            adw::StyleManager::default().connect_dark_notify(
-                glib::clone!(@weak self as panel => move |_| {
-                    panel.update_source_view_style();
-                }),
-            );
-        }
-
         fn spinning(&self) -> bool {
             self.metadata_stack
                 .visible_child()
