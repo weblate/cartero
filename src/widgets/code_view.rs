@@ -15,11 +15,16 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+use glib::object::ObjectExt;
 use gtk::glib;
 
 mod imp {
+    use std::sync::OnceLock;
+
     use glib::object::Cast;
+    use glib::subclass::Signal;
     use glib::value::ToValue;
+    use gtk::gdk;
     use gtk::gio::SettingsBindFlags;
     use gtk::prelude::{SettingsExtManual, TextViewExt};
     use gtk::subclass::prelude::*;
@@ -38,9 +43,25 @@ mod imp {
         const NAME: &'static str = "CarteroCodeView";
         type Type = super::CodeView;
         type ParentType = sourceview5::View;
+
+        fn class_init(klass: &mut Self::Class) {
+            klass.add_binding_action(
+                gdk::Key::F,
+                gdk::ModifierType::CONTROL_MASK,
+                "codeview.search",
+            );
+            klass.install_action("codeview.search", None, |widget, _, _| {
+                widget.start_search();
+            });
+        }
     }
 
     impl ObjectImpl for CodeView {
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: OnceLock<Vec<Signal>> = OnceLock::new();
+            SIGNALS.get_or_init(|| vec![Signal::builder("search-requested").build()])
+        }
+
         fn constructed(&self) {
             self.parent_constructed();
             self.init_settings();
@@ -147,4 +168,10 @@ glib::wrapper! {
     pub struct CodeView(ObjectSubclass<imp::CodeView>)
         @extends gtk::Widget, gtk::TextView, sourceview5::View,
         @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget, gtk::Scrollable;
+}
+
+impl CodeView {
+    pub fn start_search(&self) {
+        self.emit_by_name::<()>("search-requested", &[]);
+    }
 }

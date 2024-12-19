@@ -27,6 +27,7 @@ mod request_body;
 mod response_headers;
 mod response_panel;
 mod save_dialog;
+mod search_box;
 
 pub use code_view::CodeView;
 pub use endpoint_pane::EndpointPane;
@@ -40,3 +41,4 @@ pub use request_body::*;
 pub use response_headers::ResponseHeaders;
 pub use response_panel::ResponsePanel;
 pub use save_dialog::SaveDialog;
+pub use search_box::SearchBox;

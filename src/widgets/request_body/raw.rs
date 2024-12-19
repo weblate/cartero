@@ -34,7 +34,7 @@ mod imp {
     use sourceview5::Buffer;
     use sourceview5::{prelude::*, LanguageManager};
 
-    use crate::widgets::{BasePayloadPane, BasePayloadPaneImpl, CodeView, PayloadType};
+    use crate::widgets::{BasePayloadPane, BasePayloadPaneImpl, CodeView, PayloadType, SearchBox};
 
     #[derive(Default, CompositeTemplate, Properties)]
     #[properties(wrapper_type = super::RawPayloadPane)]
@@ -45,6 +45,9 @@ mod imp {
 
         #[template_child]
         buffer: TemplateChild<Buffer>,
+
+        #[template_child]
+        search: TemplateChild<SearchBox>,
 
         #[property(get = Self::format, set = Self::set_format, builder(PayloadType::default()))]
         _format: RefCell<PayloadType>,
@@ -59,6 +62,7 @@ mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
+            klass.bind_template_callbacks();
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {
@@ -89,6 +93,7 @@ mod imp {
 
     impl BasePayloadPaneImpl for RawPayloadPane {}
 
+    #[gtk::template_callbacks]
     impl RawPayloadPane {
         pub(super) fn payload(&self) -> Vec<u8> {
             let (start, end) = self.buffer.bounds();
@@ -126,6 +131,31 @@ mod imp {
                 Some(lang) => self.buffer.set_language(Some(&lang)),
                 None => self.buffer.set_language(None),
             }
+        }
+
+        #[template_callback]
+        fn on_search_requested(&self) {
+            self.search.set_visible(true);
+        }
+
+        #[template_callback]
+        fn on_search_previous(&self) {
+            println!("move previous");
+        }
+
+        #[template_callback]
+        fn on_search_next(&self) {
+            println!("move next");
+        }
+
+        #[template_callback]
+        fn on_search_close(&self) {
+            self.search.set_visible(false);
+        }
+
+        #[template_callback]
+        fn on_search_activate(&self, value: &str) {
+            println!("change search to {value}");
         }
     }
 }
