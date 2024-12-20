@@ -31,13 +31,13 @@ mod imp {
     use glib::Properties;
     use gtk::gdk::Display;
     use gtk::subclass::prelude::*;
-    use gtk::CompositeTemplate;
     use gtk::{prelude::*, template_callbacks, Button};
-    use sourceview5::Buffer;
+    use gtk::{CompositeTemplate, Revealer};
     use sourceview5::{prelude::*, LanguageManager};
+    use sourceview5::{Buffer, SearchContext};
 
     use crate::app::CarteroApplication;
-    use crate::widgets::{BaseExportPane, BaseExportPaneImpl, CodeView, ExportType};
+    use crate::widgets::{BaseExportPane, BaseExportPaneImpl, CodeView, ExportType, SearchBox};
     use crate::win::CarteroWindow;
 
     #[derive(Default, CompositeTemplate, Properties)]
@@ -52,6 +52,15 @@ mod imp {
 
         #[template_child]
         copy_button: TemplateChild<Button>,
+
+        #[template_child]
+        search: TemplateChild<SearchBox>,
+
+        #[template_child]
+        search_revealer: TemplateChild<Revealer>,
+
+        #[template_child]
+        search_context: TemplateChild<SearchContext>,
 
         #[property(get = Self::format, set = Self::set_format, builder(ExportType::default()))]
         _format: RefCell<ExportType>,
@@ -141,6 +150,35 @@ mod imp {
             };
 
             self.buffer.set_language(language.as_ref());
+        }
+
+        fn get_selected_text(&self) -> Option<String> {
+            if self.buffer.has_selection() {
+                if let Some((start, end)) = self.buffer.selection_bounds() {
+                    let text = self.buffer.slice(&start, &end, false);
+                    return Some(text.into());
+                }
+            }
+            None
+        }
+
+        #[template_callback]
+        fn on_search_requested(&self) {
+            if !self.search_revealer.reveals_child() {
+                self.search_revealer.set_visible(true);
+                self.search_revealer.set_reveal_child(true);
+            }
+            let text = self.get_selected_text();
+            self.search.init_search(text.as_deref());
+            self.search.focus();
+        }
+
+        #[template_callback]
+        fn on_search_close(&self) {
+            self.search_revealer.set_reveal_child(false);
+            self.search_revealer.set_visible(false);
+            self.search_context.settings().set_search_text(None);
+            self.view.grab_focus();
         }
     }
 }
