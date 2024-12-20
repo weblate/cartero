@@ -24,19 +24,39 @@ template $CarteroSearchBox: Gtk.Box {
   ]
 
   Gtk.Box {
-    styles [
-      "linked"
-    ]
+    css-name: "entry";
+    width-request: 300;
 
-    Gtk.Entry search_content {
-      primary-icon-name: "system-search-symbolic";
-      primary-icon-sensitive: false;
-      max-width-chars: 30;
+    Gtk.Image {
+      icon-name: "system-search-symbolic";
+    }
+
+    Gtk.Text search_content {
+      styles [
+        "flat"
+      ]
+
+      max-width-chars: 10;
+      width-chars: 10;
+      hexpand: true;
+      vexpand: true;
       placeholder-text: _("Search");
       tooltip-text: _("Search");
       activate => $on_text_activate() swapped;
       changed => $on_text_changed() swapped;
     }
+
+    Gtk.Label search_results {
+      label: "";
+      xalign: 1;
+      opacity: 0.5;
+    }
+  }
+
+  Gtk.Box {
+    styles [
+      "linked"
+    ]
 
     Gtk.Button search_previous {
       action-name: "search.previous";
@@ -51,9 +71,15 @@ template $CarteroSearchBox: Gtk.Box {
     }
   }
 
-  Gtk.Button search_close {
-    action-name: "search.close";
-    icon-name: "window-close-symbolic";
-    tooltip-text: _("Close search");
+  Gtk.Box {
+    styles [
+      "linked"
+    ]
+
+    Gtk.Button search_close {
+      action-name: "search.close";
+      icon-name: "window-close-symbolic";
+      tooltip-text: _("Close search");
+    }
   }
 }

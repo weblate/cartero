@@ -37,6 +37,7 @@ mod imp {
     use sourceview5::prelude::SearchSettingsExt;
     use sourceview5::SearchContext;
 
+    use crate::i18n::i18n_f;
     use crate::widgets::CodeView;
 
     #[derive(CompositeTemplate, Default, Properties)]
@@ -50,7 +51,7 @@ mod imp {
         pub(super) search_context: RefCell<SearchContext>,
 
         #[template_child]
-        pub(super) search_content: TemplateChild<gtk::Entry>,
+        pub(super) search_content: TemplateChild<gtk::Text>,
 
         #[template_child]
         search_previous: TemplateChild<gtk::Button>,
@@ -60,6 +61,9 @@ mod imp {
 
         #[template_child]
         search_close: TemplateChild<gtk::Button>,
+
+        #[template_child]
+        search_results: TemplateChild<gtk::Label>,
     }
 
     #[glib::object_subclass]
@@ -125,6 +129,15 @@ mod imp {
             let group = SimpleActionGroup::new();
             group.add_action_entries([action_previous, action_next, action_close, action_focus]);
             obj.insert_action_group("search", Some(&group));
+
+            obj.connect_search_context_notify(glib::clone!(@weak self as imp => move |_| {
+                let context = imp.search_context.borrow();
+                context.connect_occurrences_count_notify(
+                    glib::clone!(@weak imp => move |_| {
+                        imp.update_search_ocurrences();
+                    }),
+                );
+            }));
         }
 
         fn editable_iter(&self, forward: bool) -> TextIter {
@@ -155,6 +168,8 @@ mod imp {
                 buffer.select_range(&start, &end);
                 editable.scroll_mark_onscreen(&buffer.get_insert());
             }
+
+            self.update_search_ocurrences();
         }
 
         fn search_backward(&self) {
@@ -167,10 +182,12 @@ mod imp {
                 buffer.select_range(&start, &end);
                 editable.scroll_mark_onscreen(&buffer.get_insert());
             }
+
+            self.update_search_ocurrences();
         }
 
         #[template_callback]
-        fn on_text_changed(&self, entry: &gtk::Entry) {
+        fn on_text_changed(&self, entry: &gtk::Text) {
             let text = entry.text();
             let search_context = self.search_context.borrow();
             search_context.settings().set_search_text(Some(&text));
@@ -180,11 +197,44 @@ mod imp {
             let found = search_context.forward(&iter).is_some();
             self.search_next.set_sensitive(found);
             self.search_previous.set_sensitive(found);
+
+            self.update_search_ocurrences();
         }
 
         #[template_callback]
         fn on_text_activate(&self) {
             self.search_forward();
+        }
+
+        fn update_search_ocurrences(&self) {
+            let editable = self.editable.borrow();
+            let buffer = editable.buffer();
+            let context = self.search_context.borrow();
+
+            let total = context.occurrences_count();
+            let current = match buffer.selection_bounds() {
+                Some((start, end)) => context.occurrence_position(&start, &end),
+                None => -1,
+            };
+
+            if total >= 1 && current >= 1 {
+                let total = format!("{total}");
+                let current = format!("{current}");
+
+                // TRANSLATORS: this string is used to build the search box ocurrences count; the first
+                // placeholder is the current ocurrence index, the second one is the total.
+                let label = i18n_f("{} of {}", &[&current, &total]);
+                self.search_results.set_label(&label);
+            } else if total >= 1 {
+                let total = format!("{total}");
+
+                // TRANSLATORS: this string is used to build the search box ocurrences count when only
+                // the number of total ocurrences is known.
+                let label = i18n_f("{} results", &[&total]);
+                self.search_results.set_label(&label);
+            } else {
+                self.search_results.set_label("");
+            }
         }
     }
 }
@@ -202,7 +252,6 @@ impl SearchBox {
     }
 
     pub fn init_search(&self, text: Option<&str>) {
-        dbg!(text);
         let imp = self.imp();
         let content = &*imp.search_content;
         let context = imp.search_context.borrow();
@@ -212,7 +261,6 @@ impl SearchBox {
         }
 
         let search_text: String = content.text().into();
-        dbg!(&search_text);
         context.settings().set_search_text(Some(&search_text));
     }
 }
