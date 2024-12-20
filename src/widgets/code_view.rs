@@ -15,7 +15,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-use glib::object::ObjectExt;
+use glib::{object::ObjectExt, Object};
 use gtk::glib;
 
 mod imp {
@@ -173,5 +173,11 @@ glib::wrapper! {
 impl CodeView {
     pub fn start_search(&self) {
         self.emit_by_name::<()>("search-requested", &[]);
+    }
+}
+
+impl Default for CodeView {
+    fn default() -> Self {
+        Object::builder().build()
     }
 }

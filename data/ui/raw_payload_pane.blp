@@ -19,11 +19,11 @@ using Gtk 4.0;
 using GtkSource 5;
 
 template $CarteroRawPayloadPane: $CarteroBasePayloadPane {
-  ScrolledWindow {
-    hexpand: true;
-    vexpand: true;
+  Gtk.Overlay {
+    ScrolledWindow {
+      hexpand: true;
+      vexpand: true;
 
-    Gtk.Overlay {
       $CarteroCodeView view {
         styles [
           "use-cartero-font"
@@ -38,21 +38,33 @@ template $CarteroRawPayloadPane: $CarteroBasePayloadPane {
         buffer: buffer;
         search-requested => $on_search_requested() swapped;
       }
+    }
 
-      [overlay]
+    [overlay]
+    Gtk.Revealer search_revealer {
+      visible: false;
+      reveal-child: false;
+      halign: end;
+      valign: start;
+      hexpand: false;
+      vexpand: false;
+
       $CarteroSearchBox search {
-        visible: false;
-        halign: end;
-        valign: start;
-        hexpand: false;
-        vexpand: false;
-        previous => $on_search_previous() swapped;
-        next => $on_search_next() swapped;
+        editable: view;
+        search-context: search_context;
         close => $on_search_close() swapped;
-        search => $on_search_activate() swapped;
       }
     }
   }
 }
 
 GtkSource.Buffer buffer {}
+
+GtkSource.SearchContext search_context {
+  buffer: buffer;
+  highlight: true;
+
+  settings: GtkSource.SearchSettings {
+    wrap-around: true;
+  };
+}

@@ -28,11 +28,11 @@ mod imp {
     use adw::subclass::bin::BinImpl;
     use glib::subclass::{InitializingObject, Signal};
     use glib::Properties;
-    use gtk::prelude::*;
     use gtk::subclass::prelude::*;
     use gtk::CompositeTemplate;
-    use sourceview5::Buffer;
+    use gtk::{prelude::*, Revealer};
     use sourceview5::{prelude::*, LanguageManager};
+    use sourceview5::{Buffer, SearchContext};
 
     use crate::widgets::{BasePayloadPane, BasePayloadPaneImpl, CodeView, PayloadType, SearchBox};
 
@@ -48,6 +48,12 @@ mod imp {
 
         #[template_child]
         search: TemplateChild<SearchBox>,
+
+        #[template_child]
+        search_revealer: TemplateChild<Revealer>,
+
+        #[template_child]
+        search_context: TemplateChild<SearchContext>,
 
         #[property(get = Self::format, set = Self::set_format, builder(PayloadType::default()))]
         _format: RefCell<PayloadType>,
@@ -135,27 +141,19 @@ mod imp {
 
         #[template_callback]
         fn on_search_requested(&self) {
-            self.search.set_visible(true);
-        }
-
-        #[template_callback]
-        fn on_search_previous(&self) {
-            println!("move previous");
-        }
-
-        #[template_callback]
-        fn on_search_next(&self) {
-            println!("move next");
+            if !self.search_revealer.reveals_child() {
+                self.search_revealer.set_visible(true);
+                self.search_revealer.set_reveal_child(true);
+            }
+            self.search.focus();
         }
 
         #[template_callback]
         fn on_search_close(&self) {
-            self.search.set_visible(false);
-        }
-
-        #[template_callback]
-        fn on_search_activate(&self, value: &str) {
-            println!("change search to {value}");
+            self.search_revealer.set_reveal_child(false);
+            self.search_revealer.set_visible(false);
+            self.search_context.settings().set_search_text(None);
+            self.view.grab_focus();
         }
     }
 }
