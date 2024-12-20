@@ -139,12 +139,24 @@ mod imp {
             }
         }
 
+        fn get_selected_text(&self) -> Option<String> {
+            if self.buffer.has_selection() {
+                if let Some((start, end)) = self.buffer.selection_bounds() {
+                    let text = self.buffer.slice(&start, &end, false);
+                    return Some(text.into());
+                }
+            }
+            None
+        }
+
         #[template_callback]
         fn on_search_requested(&self) {
             if !self.search_revealer.reveals_child() {
                 self.search_revealer.set_visible(true);
                 self.search_revealer.set_reveal_child(true);
             }
+            let text = self.get_selected_text();
+            self.search.init_search(text.as_deref());
             self.search.focus();
         }
 

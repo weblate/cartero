@@ -16,7 +16,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 use glib::subclass::types::ObjectSubclassIsExt;
-use gtk::{glib, prelude::WidgetExt};
+use gtk::{
+    glib,
+    prelude::{EditableExt, WidgetExt},
+};
+use sourceview5::prelude::SearchSettingsExt;
 
 mod imp {
     use std::cell::RefCell;
@@ -43,7 +47,7 @@ mod imp {
         editable: RefCell<CodeView>,
 
         #[property(get, set)]
-        search_context: RefCell<SearchContext>,
+        pub(super) search_context: RefCell<SearchContext>,
 
         #[template_child]
         pub(super) search_content: TemplateChild<gtk::Entry>,
@@ -195,5 +199,20 @@ impl SearchBox {
     pub fn focus(&self) {
         let imp = self.imp();
         imp.search_content.grab_focus();
+    }
+
+    pub fn init_search(&self, text: Option<&str>) {
+        dbg!(text);
+        let imp = self.imp();
+        let content = &*imp.search_content;
+        let context = imp.search_context.borrow();
+
+        if let Some(text) = text {
+            content.set_text(text);
+        }
+
+        let search_text: String = content.text().into();
+        dbg!(&search_text);
+        context.settings().set_search_text(Some(&search_text));
     }
 }
