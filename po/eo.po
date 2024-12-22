@@ -170,46 +170,39 @@ msgid "Tab operations"
 msgstr ""
 
 #: data/gtk/help_overlay.blp:43
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "New request tab"
-msgstr "Cartero"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:48
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Open request"
-msgstr "Cartero"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:53
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Save request"
-msgstr "Cartero"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:58
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Save request as"
-msgstr "Cartero"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:63
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Close request tab"
-msgstr "Fermu"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:69
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Request operations"
-msgstr "HTTP-metodo"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:72
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Send request"
-msgstr "Cartero"
+msgstr ""
 
 #: data/ui/code_export_pane.blp:64
 msgid "Copy"
@@ -291,14 +284,12 @@ msgid "Save"
 msgstr "Konservi"
 
 #: data/ui/main_window.blp:95 data/ui/main_window_no_csd.blp:102
-#, fuzzy
 msgid "Welcome to Cartero"
-msgstr "Pri Cartero"
+msgstr ""
 
 #: data/ui/main_window.blp:96 data/ui/main_window_no_csd.blp:103
-#, fuzzy
 msgid "Create or open a request and start testing APIs now."
-msgstr "Sendu HTTP-petojn kaj testu retaj API-oj."
+msgstr ""
 
 #: data/ui/main_window.blp:115 data/ui/main_window.blp:149
 #: data/ui/main_window_no_csd.blp:122 data/ui/main_window_no_csd.blp:156
@@ -320,9 +311,8 @@ msgid "Save request as…"
 msgstr ""
 
 #: data/ui/main_window.blp:169 data/ui/main_window_no_csd.blp:176
-#, fuzzy
 msgid "Close tab"
-msgstr "Fermu"
+msgstr ""
 
 #: data/ui/main_window.blp:176 data/ui/settings_dialog.blp:22
 msgid "Settings"
@@ -333,9 +323,8 @@ msgid "Body appearance"
 msgstr ""
 
 #: data/ui/main_window.blp:185 data/ui/main_window_no_csd.blp:187
-#, fuzzy
 msgid "Wrap content"
-msgstr "Se la korpoj de la HTTP-petoj devus esti envolvita"
+msgstr ""
 
 #: data/ui/main_window.blp:190 data/ui/main_window_no_csd.blp:192
 msgid "Show line numbers"
@@ -386,9 +375,8 @@ msgid "Request method"
 msgstr "HTTP-metodo"
 
 #: data/ui/payload_tab.blp:35
-#, fuzzy
 msgid "Body type"
-msgstr "Korpo"
+msgstr ""
 
 #: data/ui/payload_tab.blp:82
 msgid "URL Encoded"
@@ -427,9 +415,8 @@ msgid "_Discard"
 msgstr ""
 
 #: data/ui/save_dialog.blp:30
-#, fuzzy
 msgid "_Save"
-msgstr "Konservi"
+msgstr ""
 
 #: data/ui/search_box.blp:43 data/ui/search_box.blp:44
 msgid "Search"
@@ -444,14 +431,12 @@ msgid "Next result"
 msgstr ""
 
 #: data/ui/search_box.blp:82
-#, fuzzy
 msgid "Close search"
-msgstr "Fermu"
+msgstr ""
 
 #: data/ui/settings_dialog.blp:27
-#, fuzzy
 msgid "Application"
-msgstr "Agoj"
+msgstr ""
 
 #: data/ui/settings_dialog.blp:31
 msgid "Appearance"
@@ -512,9 +497,8 @@ msgid "Maximum redirects"
 msgstr ""
 
 #: data/ui/settings_dialog.blp:103
-#, fuzzy
 msgid "Request timeout"
-msgstr "HTTP-metodo"
+msgstr ""
 
 #: src/widgets/export_tab/code.rs:117
 msgid "Content copied to the clipboard"
@@ -525,9 +509,8 @@ msgid "Request (.cartero)"
 msgstr "Petdosiero (.cartero)"
 
 #: src/widgets/file_dialogs.rs:20
-#, fuzzy
 msgid "Request"
-msgstr "URL"
+msgstr ""
 
 #: src/widgets/file_dialogs.rs:34 src/widgets/file_dialogs.rs:78
 msgid "Open request"

@@ -441,19 +441,16 @@ msgid "Next result"
 msgstr ""
 
 #: data/ui/search_box.blp:82
-#, fuzzy
 msgid "Close search"
-msgstr "தாவலை மூடு"
+msgstr ""
 
 #: data/ui/settings_dialog.blp:27
-#, fuzzy
 msgid "Application"
-msgstr "செயல்கள்"
+msgstr ""
 
 #: data/ui/settings_dialog.blp:31
-#, fuzzy
 msgid "Appearance"
-msgstr "உடல் தோற்றம்"
+msgstr ""
 
 #: data/ui/settings_dialog.blp:34
 msgid "Application style"
@@ -510,9 +507,8 @@ msgid "Maximum redirects"
 msgstr ""
 
 #: data/ui/settings_dialog.blp:103
-#, fuzzy
 msgid "Request timeout"
-msgstr "கோரிக்கை முறை"
+msgstr ""
 
 #: src/widgets/export_tab/code.rs:117
 msgid "Content copied to the clipboard"

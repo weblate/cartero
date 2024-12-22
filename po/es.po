@@ -546,7 +546,6 @@ msgstr "{} de {}"
 #. TRANSLATORS: this string is used to build the search box ocurrences count when only
 #. the number of total ocurrences is known.
 #: src/widgets/search_box.rs:234
-#, fuzzy
 msgid "{} result"
 msgid_plural "{} results"
 msgstr[0] "{} resultado"
@@ -589,7 +588,6 @@ msgstr "© 2024 los autores de Cartero"
 #~ msgid "The style to use in the application"
 #~ msgstr "El estilo que quieres usar en la aplicación"
 
-#, fuzzy
 #~ msgid "Cartero request"
 #~ msgstr "Guardar petición"
 

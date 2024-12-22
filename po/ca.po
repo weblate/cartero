@@ -158,22 +158,19 @@ msgid "Whether to create backup files on save"
 msgstr ""
 
 #: data/gtk/help_overlay.blp:26
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "General shortcuts"
-msgstr "Dreceres de teclat"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:29
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Show Keyboard Shortcuts"
-msgstr "Dreceres de teclat"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:34
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Quit"
-msgstr "Sortir"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:40
 msgctxt "shortcuts window"
@@ -181,46 +178,39 @@ msgid "Tab operations"
 msgstr ""
 
 #: data/gtk/help_overlay.blp:43
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "New request tab"
-msgstr "Guardar petició com…"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:48
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Open request"
-msgstr "Obir petició"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:53
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Save request"
-msgstr "Guardar petició"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:58
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Save request as"
-msgstr "Guardar petició com…"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:63
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Close request tab"
-msgstr "Tancar pestanya"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:69
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Request operations"
-msgstr "Mètode de petició"
+msgstr ""
 
 #: data/gtk/help_overlay.blp:72
-#, fuzzy
 msgctxt "shortcuts window"
 msgid "Send request"
-msgstr "Guardar petició"
+msgstr ""
 
 #: data/ui/code_export_pane.blp:64
 msgid "Copy"
@@ -451,19 +441,16 @@ msgid "Next result"
 msgstr ""
 
 #: data/ui/search_box.blp:82
-#, fuzzy
 msgid "Close search"
-msgstr "Tancar pestanya"
+msgstr ""
 
 #: data/ui/settings_dialog.blp:27
-#, fuzzy
 msgid "Application"
-msgstr "Accions"
+msgstr ""
 
 #: data/ui/settings_dialog.blp:31
-#, fuzzy
 msgid "Appearance"
-msgstr "Aparença del cos"
+msgstr ""
 
 #: data/ui/settings_dialog.blp:34
 msgid "Application style"
@@ -520,9 +507,8 @@ msgid "Maximum redirects"
 msgstr ""
 
 #: data/ui/settings_dialog.blp:103
-#, fuzzy
 msgid "Request timeout"
-msgstr "Mètode de petició"
+msgstr ""
 
 #: src/widgets/export_tab/code.rs:117
 msgid "Content copied to the clipboard"
@@ -570,7 +556,6 @@ msgstr "Els autors de Cartero"
 msgid "© 2024 the Cartero authors"
 msgstr "© 2024 Els autors de Cartero"
 
-#, fuzzy
 #~ msgid "Cartero request"
 #~ msgstr "Guardar petició"
 
