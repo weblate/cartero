@@ -108,10 +108,21 @@ h1 {
 .extra-download {
   list-style: none;
   padding-left: 0;
+  font-weight: bold;
+}
+
+.extra-download img {
+  height: 24px;
+  aspect-ratio: 1 / 1;
+  vertical-align: middle;
 }
 
 .extra-download li {
   margin-bottom: 0.4rem;
+}
+
+.extra-download a {
+  font-weight: normal;
 }
 
 .features {

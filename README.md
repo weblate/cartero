@@ -14,9 +14,9 @@ methods as well as attaching body payloads to compatible requests.
 
 Features:
 
-* Loads and saves to plain Git-friendly TOML files, so that you can own your data.
-* Customization and modification of the request headers and body payloads.
-* Variable binding for API keys and other secret information.
+- Loads and saves to plain Git-friendly TOML files, so that you can own your data.
+- Customization and modification of the request headers and body payloads.
+- Variable binding for API keys and other secret information.
 
 ## Motivation
 
@@ -36,17 +36,15 @@ some unwanted artificial intelligence at users.
 You can also download a version for Windows or macOS.
 
 > [!WARNING]
-> **The Windows and macOS versions are currently not notarized or signed.**
-> On first run on Windows, you'll need to confirm the SmartScreen warning.
-> On first run on macOS, you'll need to allow opening apps from unidentified developers.
-> [Visit Apple Support for more information and instructions depending on your OS version](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac).
-> If you don't trust these binary distributions, you can always build from sources.
+>
+> **The Windows version is still not signed.** On first run on Windows, you'll need to confirm the SmartScreen warning. (I promise I'm purchasing a certificate after Christmas.)
 
-|                             | Platform                   | Latest version                       |
-|-----------------------------|----------------------------|--------------------------------------|
-| ![Windows](doc/windows.png) | Windows, x86_64            | [v0.1.2 (installer)][windows-x86_64] |
-| ![macOS](doc/macos.png)     | macOS, Apple Sillicon      | [v0.1.2 (.dmg)][macos-sillicon]      |
-| ![macOS](doc/macos.png)     | macOS, Intel               | [v0.1.2 (.dmg)][macos-intel]         |
+|                               | Platform              | Latest version                       |
+| ----------------------------- | --------------------- | ------------------------------------ |
+| ![Windows](doc/windows.png)   | Windows, x86_64       | [v0.1.3 (installer)][windows-x86_64] |
+| ![macOS](doc/macos.png)       | macOS, Apple Sillicon | [v0.1.3 (.dmg)][macos-sillicon]      |
+| ![macOS](doc/macos.png)       | macOS, Intel          | [v0.1.3 (.dmg)][macos-intel]         |
+| ![AppImage](doc/appimage.png) | AppImage, x86_64      | [v0.1.3 (AppImage)][appimage-x86_64] |
 
 ## Building
 
@@ -90,10 +88,10 @@ distributions, or for development purposes.
 Currently, to build the application you'll have to make sure that the required
 libraries are installed on your system.
 
-* glib >= 2.72
-* gtk >= 4.14
-* gtksourceview >= 5.4
-* libadwaita >= 1.5
+- glib >= 2.72
+- gtk >= 4.14
+- gtksourceview >= 5.4
+- libadwaita >= 1.5
 
 Make sure that you have Meson in your system. For instance,
 
@@ -214,20 +212,20 @@ contribute if you wish. [Fork the project][fork] and commit your code.
 
 Some checklist rules before submitting a pull request:
 
-* **Use a feature branch**, do not make your changes in the trunk branch
+- **Use a feature branch**, do not make your changes in the trunk branch
   directly.
 
-* **Rebase your code** and make sure that you are working on top of the most
+- **Rebase your code** and make sure that you are working on top of the most
   recent version of the trunk branch, in case something has changed while you
   were working on your code.
 
-* **Update the locales** if you changed strings. The ninja target that you are
+- **Update the locales** if you changed strings. The ninja target that you are
   looking for is called `cartero-update-po` (such as `ninja -C build
-  cartero-update-po`). Don't worry, you don't have to translate the strings by
+cartero-update-po`). Don't worry, you don't have to translate the strings by
   yourself, but make sure that the new templates are added to the .po and .pot
   files.
 
-* **Use the pre-commit hook**. The pre-commit hook will validate that your code
+- **Use the pre-commit hook**. The pre-commit hook will validate that your code
   is formatted. It should be automatically configured if you run Meson in
   development mode (`-Dprofile=development`), but you can install it on your
   own or run `hooks/pre-commit.hook`.
@@ -274,6 +272,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
+
 The Cartero icon is published under the a [Creative Commons
 Attribution-ShareAlike 4.0 International license][ccbysa].
 
@@ -302,6 +301,7 @@ Dani's [dev blog][blog] (in Spanish) of Cartero.
 [fork]: https://github.com/danirod/cartero/fork
 [blog]: https://danirod.es/secciones/devlogs/cartero/
 [weblate]: https://hosted.weblate.org/projects/cartero/
-[windows-x86_64]: https://github.com/danirod/cartero/releases/download/v0.1.2/Cartero-0.1.2b-windows-x64.exe
-[macos-sillicon]: https://github.com/danirod/cartero/releases/download/v0.1.2/Cartero-0.1.2-macOS-ARM64.dmg
-[macos-intel]: https://github.com/danirod/cartero/releases/download/v0.1.2/Cartero-0.1.2-macOS-Intel.dmg
+[windows-x86_64]: https://github.com/danirod/cartero/releases/download/v0.1.3/Cartero-0.1.3-windows-x64.exe
+[macos-sillicon]: https://github.com/danirod/cartero/releases/download/v0.1.3/Cartero-0.1.3-macOS-arm64.dmg
+[macos-intel]: https://github.com/danirod/cartero/releases/download/v0.1.3/Cartero-0.1.3-macOS-amd64.dmg
+[appimage-x86_64]: https://github.com/danirod/cartero/releases/download/v0.1.3/Cartero-0.1.3-x86_64.AppImage
