@@ -8,14 +8,16 @@ msgstr ""
 "Project-Id-Version: cartero\n"
 "Report-Msgid-Bugs-To: https://github.com/danirod/cartero/issues\n"
 "POT-Creation-Date: 2024-12-22 16:58+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-12-28 14:00+0000\n"
+"Last-Translator: Altero <aurelien.reinert4@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/cartero/cartero/"
+"fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: data/cartero.appdata.xml.in.in:8 data/cartero.desktop.in.in:4
 msgid "Make HTTP requests and test APIs"
@@ -31,7 +33,7 @@ msgstr ""
 
 #: data/cartero.appdata.xml.in.in:12
 msgid "Features:"
-msgstr ""
+msgstr "Fonctionnalités :"
 
 #: data/cartero.appdata.xml.in.in:14
 msgid ""
@@ -50,7 +52,7 @@ msgstr ""
 
 #: data/cartero.appdata.xml.in.in:22
 msgid "Main window of Cartero"
-msgstr ""
+msgstr "Fenêtre principale de Cartero"
 
 #: data/cartero.appdata.xml.in.in:26
 msgid "Modifying HTTP headers"
@@ -62,7 +64,7 @@ msgstr ""
 
 #: data/cartero.desktop.in.in:3
 msgid "Cartero"
-msgstr ""
+msgstr "Cartero"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/cartero.desktop.in.in:11
@@ -72,6 +74,7 @@ msgstr ""
 #: data/es.danirod.Cartero.gschema.xml:12
 msgid "Automatically indent new lines for the request body"
 msgstr ""
+"Indenter automatiquement les nouvelles lignes pour le corps de la requête"
 
 #: data/es.danirod.Cartero.gschema.xml:16
 msgid "Wrap the body content"
@@ -127,7 +130,7 @@ msgstr ""
 
 #: data/es.danirod.Cartero.gschema.xml:68
 msgid "Maximum number of redirections to follow before giving up"
-msgstr ""
+msgstr "Nombre maximum de redirections à suivre avant d'abandonner"
 
 #: data/es.danirod.Cartero.gschema.xml:72
 msgid "Maximum timeout when awaiting for an HTTP response."
@@ -152,81 +155,81 @@ msgstr ""
 #: data/gtk/help_overlay.blp:26
 msgctxt "shortcuts window"
 msgid "General shortcuts"
-msgstr ""
+msgstr "Raccourcis généraux"
 
 #: data/gtk/help_overlay.blp:29
 msgctxt "shortcuts window"
 msgid "Show Keyboard Shortcuts"
-msgstr ""
+msgstr "Afficher les raccourcis clavier"
 
 #: data/gtk/help_overlay.blp:34
 msgctxt "shortcuts window"
 msgid "Quit"
-msgstr ""
+msgstr "Quitter"
 
 #: data/gtk/help_overlay.blp:40
 msgctxt "shortcuts window"
 msgid "Tab operations"
-msgstr ""
+msgstr "Opérations sur les onglets"
 
 #: data/gtk/help_overlay.blp:43
 msgctxt "shortcuts window"
 msgid "New request tab"
-msgstr ""
+msgstr "Nouvel onglet de requête"
 
 #: data/gtk/help_overlay.blp:48
 msgctxt "shortcuts window"
 msgid "Open request"
-msgstr ""
+msgstr "Ouvrir la requête"
 
 #: data/gtk/help_overlay.blp:53
 msgctxt "shortcuts window"
 msgid "Save request"
-msgstr ""
+msgstr "Enregistrer la requête"
 
 #: data/gtk/help_overlay.blp:58
 msgctxt "shortcuts window"
 msgid "Save request as"
-msgstr ""
+msgstr "Enregistrer la requête sous"
 
 #: data/gtk/help_overlay.blp:63
 msgctxt "shortcuts window"
 msgid "Close request tab"
-msgstr ""
+msgstr "Fermer l'onglet de requête"
 
 #: data/gtk/help_overlay.blp:69
 msgctxt "shortcuts window"
 msgid "Request operations"
-msgstr ""
+msgstr "Opérations sur les requêtes"
 
 #: data/gtk/help_overlay.blp:72
 msgctxt "shortcuts window"
 msgid "Send request"
-msgstr ""
+msgstr "Envoyer la requête"
 
 #: data/ui/code_export_pane.blp:64
 msgid "Copy"
-msgstr ""
+msgstr "Copier"
 
 #: data/ui/endpoint_pane.blp:58
 msgid "Request URL"
-msgstr ""
+msgstr "URL de requête"
 
 #: data/ui/endpoint_pane.blp:69
 msgid "Send"
-msgstr ""
+msgstr "Envoyer"
 
 #: data/ui/endpoint_pane.blp:70
 msgid "Execute this HTTP request"
-msgstr ""
+msgstr "Exécuter cette requête HTTP"
 
 #: data/ui/endpoint_pane.blp:103
 msgid "Parameters"
-msgstr ""
+msgstr "Paramètres"
 
 #: data/ui/endpoint_pane.blp:124 data/ui/response_panel.blp:92
 msgid "Headers"
-msgstr ""
+msgstr "En-têtes"
 
 #: data/ui/endpoint_pane.blp:145
 msgid "Variables"
@@ -234,7 +237,7 @@ msgstr ""
 
 #: data/ui/endpoint_pane.blp:166 data/ui/response_panel.blp:47
 msgid "Body"
-msgstr ""
+msgstr "Corps"
 
 #: data/ui/endpoint_pane.blp:174
 msgid "Export request"
@@ -250,15 +253,15 @@ msgstr ""
 
 #: data/ui/key_value_row.blp:40
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: data/ui/key_value_row.blp:50
 msgid "Value"
-msgstr ""
+msgstr "Valeur"
 
 #: data/ui/key_value_row.blp:61
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
 #: data/ui/key_value_row.blp:74
 msgid "Toggle secret"
@@ -266,7 +269,7 @@ msgstr ""
 
 #: data/ui/key_value_row.blp:81
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: data/ui/main_window.blp:41 data/ui/main_window_no_csd.blp:39
 msgid "New"
@@ -276,12 +279,12 @@ msgstr ""
 #: data/ui/main_window_no_csd.blp:50 data/ui/main_window_no_csd.blp:61
 #: src/widgets/file_dialogs.rs:33 src/widgets/file_dialogs.rs:77
 msgid "Open"
-msgstr ""
+msgstr "Ouvrir"
 
 #: data/ui/main_window.blp:71 data/ui/main_window_no_csd.blp:69
 #: src/widgets/file_dialogs.rs:133
 msgid "Save"
-msgstr ""
+msgstr "Enregistrer"
 
 #: data/ui/main_window.blp:95 data/ui/main_window_no_csd.blp:102
 msgid "Welcome to Cartero"
@@ -294,12 +297,12 @@ msgstr ""
 #: data/ui/main_window.blp:115 data/ui/main_window.blp:149
 #: data/ui/main_window_no_csd.blp:122 data/ui/main_window_no_csd.blp:156
 msgid "New tab"
-msgstr ""
+msgstr "Nouvel onglet"
 
 #: data/ui/main_window.blp:128 data/ui/main_window.blp:154
 #: data/ui/main_window_no_csd.blp:135 data/ui/main_window_no_csd.blp:161
 msgid "Open request…"
-msgstr ""
+msgstr "Ouvrir une requête…"
 
 #: data/ui/main_window.blp:159 data/ui/main_window_no_csd.blp:166
 #: src/widgets/file_dialogs.rs:134
@@ -312,11 +315,11 @@ msgstr ""
 
 #: data/ui/main_window.blp:169 data/ui/main_window_no_csd.blp:176
 msgid "Close tab"
-msgstr ""
+msgstr "Fermer l'onglet"
 
 #: data/ui/main_window.blp:176 data/ui/settings_dialog.blp:22
 msgid "Settings"
-msgstr ""
+msgstr "Préférences"
 
 #: data/ui/main_window.blp:181 data/ui/main_window_no_csd.blp:183
 msgid "Body appearance"
@@ -328,55 +331,55 @@ msgstr ""
 
 #: data/ui/main_window.blp:190 data/ui/main_window_no_csd.blp:192
 msgid "Show line numbers"
-msgstr ""
+msgstr "Afficher les numéros de ligne"
 
 #: data/ui/main_window.blp:197 data/ui/main_window_no_csd.blp:199
 msgid "Automatic indentation"
-msgstr ""
+msgstr "Indentation automatique"
 
 #: data/ui/main_window.blp:202 data/ui/main_window_no_csd.blp:204
 msgid "Indent with spaces"
-msgstr ""
+msgstr "Indenter avec des espaces"
 
 #: data/ui/main_window.blp:208 data/ui/main_window_no_csd.blp:210
 msgid "Indent with tabs"
-msgstr ""
+msgstr "Indenter avec des tabulations"
 
 #: data/ui/main_window.blp:214 data/ui/main_window_no_csd.blp:216
 msgid "Spaces per tab"
-msgstr ""
+msgstr "Espaces par tabulation"
 
 #: data/ui/main_window.blp:217 data/ui/main_window_no_csd.blp:219
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: data/ui/main_window.blp:223 data/ui/main_window_no_csd.blp:225
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: data/ui/main_window.blp:229 data/ui/main_window_no_csd.blp:231
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #: data/ui/main_window.blp:240 data/ui/main_window_no_csd.blp:242
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Raccourcis clavier"
 
 #: data/ui/main_window.blp:245 data/ui/main_window_no_csd.blp:247
 msgid "About Cartero"
-msgstr ""
+msgstr "À propos de Cartero"
 
 #: data/ui/main_window.blp:250 data/ui/main_window_no_csd.blp:252
 msgid "Quit"
-msgstr ""
+msgstr "Quitter"
 
 #: data/ui/method_dropdown.blp:30
 msgid "Request method"
-msgstr ""
+msgstr "Méthode de requête"
 
 #: data/ui/payload_tab.blp:35
 msgid "Body type"
-msgstr ""
+msgstr "Type de corps"
 
 #: data/ui/payload_tab.blp:82
 msgid "URL Encoded"
@@ -400,39 +403,41 @@ msgstr ""
 
 #: data/ui/save_dialog.blp:22
 msgid "Save changes?"
-msgstr ""
+msgstr "Enregistrer les modifications ?"
 
 #: data/ui/save_dialog.blp:23
 msgid "There are changes that have not been saved yet. What do you want to do?"
 msgstr ""
+"Certaines modifications n'ont pas encore été enregistrées. Que souhaitez-"
+"vous faire ?"
 
 #: data/ui/save_dialog.blp:28
 msgid "_Cancel"
-msgstr ""
+msgstr "_Annuler"
 
 #: data/ui/save_dialog.blp:29
 msgid "_Discard"
-msgstr ""
+msgstr "_Abandonner"
 
 #: data/ui/save_dialog.blp:30
 msgid "_Save"
-msgstr ""
+msgstr "_Enregistrer"
 
 #: data/ui/search_box.blp:43 data/ui/search_box.blp:44
 msgid "Search"
-msgstr ""
+msgstr "Rechercher"
 
 #: data/ui/search_box.blp:64
 msgid "Previous result"
-msgstr ""
+msgstr "Résultat précédent"
 
 #: data/ui/search_box.blp:70
 msgid "Next result"
-msgstr ""
+msgstr "Résultat suivant"
 
 #: data/ui/search_box.blp:82
 msgid "Close search"
-msgstr ""
+msgstr "Fermer la recherche"
 
 #: data/ui/settings_dialog.blp:27
 msgid "Application"
@@ -440,7 +445,7 @@ msgstr ""
 
 #: data/ui/settings_dialog.blp:31
 msgid "Appearance"
-msgstr ""
+msgstr "Apparence"
 
 #: data/ui/settings_dialog.blp:34
 msgid "Application style"
@@ -452,19 +457,19 @@ msgstr ""
 
 #: data/ui/settings_dialog.blp:39
 msgid "Light mode"
-msgstr ""
+msgstr "Thème clair"
 
 #: data/ui/settings_dialog.blp:40
 msgid "Dark mode"
-msgstr ""
+msgstr "Thème sombre"
 
 #: data/ui/settings_dialog.blp:46
 msgid "Use system font"
-msgstr ""
+msgstr "Utiliser la police système"
 
 #: data/ui/settings_dialog.blp:50
 msgid "Custom font"
-msgstr ""
+msgstr "Police personnalisée"
 
 #: data/ui/settings_dialog.blp:65
 msgid "File settings"
@@ -482,7 +487,7 @@ msgstr ""
 
 #: data/ui/settings_dialog.blp:75 data/ui/settings_dialog.blp:79
 msgid "HTTP Client"
-msgstr ""
+msgstr "Client HTTP"
 
 #: data/ui/settings_dialog.blp:82
 msgid "Enforce TLS validation"
@@ -518,11 +523,11 @@ msgstr ""
 
 #: src/widgets/item_pane.rs:99
 msgid "(untitled)"
-msgstr ""
+msgstr "(sans titre)"
 
 #: src/widgets/item_pane.rs:115
 msgid "Draft"
-msgstr ""
+msgstr "Brouillon"
 
 #. TRANSLATORS: this string is used to build the search box ocurrences count; the first
 #. placeholder is the current ocurrence index, the second one is the total.
@@ -540,8 +545,8 @@ msgstr[1] ""
 
 #: src/win.rs:516
 msgid "The Cartero authors"
-msgstr ""
+msgstr "Les auteurs de Cartero"
 
 #: src/win.rs:517
 msgid "© 2024 the Cartero authors"
-msgstr ""
+msgstr "© 2024 les auteurs de Cartero"
