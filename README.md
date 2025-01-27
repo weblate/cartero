@@ -35,16 +35,12 @@ some unwanted artificial intelligence at users.
 
 You can also download a version for Windows or macOS.
 
-> [!WARNING]
->
-> **The Windows version is still not signed.** On first run on Windows, you'll need to confirm the SmartScreen warning. (I promise I'm purchasing a certificate after Christmas.)
-
 |                               | Platform              | Latest version                       |
 | ----------------------------- | --------------------- | ------------------------------------ |
-| ![Windows](doc/windows.png)   | Windows, x86_64       | [v0.1.3 (installer)][windows-x86_64] |
-| ![macOS](doc/macos.png)       | macOS, Apple Sillicon | [v0.1.3 (.dmg)][macos-sillicon]      |
-| ![macOS](doc/macos.png)       | macOS, Intel          | [v0.1.3 (.dmg)][macos-intel]         |
-| ![AppImage](doc/appimage.png) | AppImage, x86_64      | [v0.1.3 (AppImage)][appimage-x86_64] |
+| ![Windows](doc/windows.png)   | Windows, x86_64       | [v0.1.4 (installer)][windows-x86_64] |
+| ![macOS](doc/macos.png)       | macOS, Apple Sillicon | [v0.1.4 (.dmg)][macos-sillicon]      |
+| ![macOS](doc/macos.png)       | macOS, Intel          | [v0.1.4 (.dmg)][macos-intel]         |
+| ![AppImage](doc/appimage.png) | AppImage, x86_64      | [v0.1.4 (AppImage)][appimage-x86_64] |
 
 ## Building
 
@@ -301,7 +297,7 @@ Dani's [dev blog][blog] (in Spanish) of Cartero.
 [fork]: https://github.com/danirod/cartero/fork
 [blog]: https://danirod.es/secciones/devlogs/cartero/
 [weblate]: https://hosted.weblate.org/projects/cartero/
-[windows-x86_64]: https://github.com/danirod/cartero/releases/download/v0.1.3/Cartero-0.1.3-windows-x64.exe
-[macos-sillicon]: https://github.com/danirod/cartero/releases/download/v0.1.3/Cartero-0.1.3-macOS-arm64.dmg
-[macos-intel]: https://github.com/danirod/cartero/releases/download/v0.1.3/Cartero-0.1.3-macOS-amd64.dmg
-[appimage-x86_64]: https://github.com/danirod/cartero/releases/download/v0.1.3/Cartero-0.1.3-x86_64.AppImage
+[windows-x86_64]: https://github.com/danirod/cartero/releases/download/v0.1.4/Cartero-0.1.4-windows-x64.exe
+[macos-sillicon]: https://github.com/danirod/cartero/releases/download/v0.1.4/Cartero-0.1.4-macOS-arm64.dmg
+[macos-intel]: https://github.com/danirod/cartero/releases/download/v0.1.4/Cartero-0.1.4-macOS-x64.dmg
+[appimage-x86_64]: https://github.com/danirod/cartero/releases/download/v0.1.4/Cartero-0.1.4-x86_64.AppImage
